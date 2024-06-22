@@ -8,6 +8,12 @@ class WebTextStyles{
       fontSize: 16,
       fontFamily: "Poppins",
       fontWeight: FontWeight.bold
-    )
+    ),
+    titleLarge: TextStyle(
+        color: WebColor.webPrimaryColor,
+        fontSize: 24,
+        fontFamily: "Poppins Bold",
+        fontWeight: FontWeight.bold
+    ),
   );
 }
