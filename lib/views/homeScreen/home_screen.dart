@@ -16,11 +16,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (ResponsiveBreakpoints.of(context).isDesktop) {
-      return const Scaffold(
+      return  Scaffold(
         body: Stack(
           children: [
-            SvgImageLoader(assetName: Assets.background, fit: BoxFit.cover),
-            HomeLayoutDesktop()
+            const SvgImageLoader(assetName: Assets.background, fit: BoxFit.cover),
+            AnimatedBackground(
+              behaviour: BubblesBehaviour(),
+              vsync: this,
+              child: const SingleChildScrollView(child: HomeLayoutDesktop(),),
+            ),
 
           ],
         ),
