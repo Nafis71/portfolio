@@ -2,18 +2,28 @@ import 'package:animated_background/animated_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:lottie/lottie.dart';
-import 'package:portfolio/viewModels/portfolio_view_model.dart';
 import 'package:portfolio/widgets/intro_widget.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
-import '../../../utils/assets.dart';
-import '../../../utils/web_color.dart';
-import '../../../wrappers/svg_image_loader.dart';
+import '../../../widgets/navbar_widget.dart';
+import '../../../widgets/skills_widget.dart';
+import '../../../widgets/social_cards_widget.dart';
 
 class HomeLayoutDesktop extends StatefulWidget {
-  const HomeLayoutDesktop({super.key});
+  final ScrollController scrollController;
+  final Function(GlobalKey key) scrollToSection;
+  final GlobalKey skillSectionKey;
+  final GlobalKey aboutSectionKey;
+  final GlobalKey projectSectionKey;
+  final GlobalKey contactMeSectionKey;
+
+  const HomeLayoutDesktop(
+      {super.key,
+      required this.scrollController,
+      required this.scrollToSection,
+      required this.skillSectionKey,
+      required this.aboutSectionKey,
+      required this.projectSectionKey,
+      required this.contactMeSectionKey});
 
   @override
   State<HomeLayoutDesktop> createState() => _HomeLayoutDesktopState();
@@ -34,10 +44,26 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
           ),
         ),
         SingleChildScrollView(
+          controller: widget.scrollController,
           child: Column(
             children: [
+              NavbarWidget(
+                scrollToSection: widget.scrollToSection,
+                skillSectionKey: widget.skillSectionKey,
+                aboutSectionKey: widget.aboutSectionKey,
+                projectSectionKey: widget.projectSectionKey,
+                contactMeSectionKey: widget.contactMeSectionKey,
+              ),
               const IntroWidget(),
-
+              const Gap(20),
+              const SocialCardsWidget(),
+              const Gap(20),
+              const Divider(
+                thickness: 0.4,
+              ),
+              const Gap(20),
+              SkillsWidget(skillSectionKey: widget.skillSectionKey,),
+              const Gap(20),
             ],
           ),
         )

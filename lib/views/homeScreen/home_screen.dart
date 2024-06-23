@@ -1,8 +1,5 @@
-import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/assets.dart';
 import 'package:portfolio/views/homeScreen/desktop/home_layout_desktop.dart';
-import 'package:portfolio/wrappers/svg_image_loader.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,12 +9,33 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
+class _HomeScreenState extends State<HomeScreen> {
+  ScrollController scrollController = ScrollController();
+  final GlobalKey _skillSectionKey = GlobalKey();
+  final GlobalKey _aboutSectionKey = GlobalKey();
+  final GlobalKey _projectSectionKey = GlobalKey();
+  final GlobalKey _contactMeSectionKey = GlobalKey();
+
+  void _scrollToSection(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(context,
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (ResponsiveBreakpoints.of(context).isDesktop) {
-      return  const Scaffold(
-        body: HomeLayoutDesktop(),
+      return Scaffold(
+        body: HomeLayoutDesktop(
+          skillSectionKey: _skillSectionKey,
+          aboutSectionKey: _aboutSectionKey,
+          projectSectionKey: _projectSectionKey,
+          contactMeSectionKey: _contactMeSectionKey,
+          scrollController: scrollController,
+          scrollToSection: _scrollToSection,
+        ),
       );
     }
     return Scaffold(

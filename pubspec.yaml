@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.2
   animated_background: ^2.0.0
   lottie: ^3.1.2
+  widget_and_text_animator: ^1.1.5
 
 dev_dependencies:
   flutter_test:
