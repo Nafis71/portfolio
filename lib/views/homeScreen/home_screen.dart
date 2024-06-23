@@ -12,22 +12,12 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>{
   @override
   Widget build(BuildContext context) {
     if (ResponsiveBreakpoints.of(context).isDesktop) {
-      return  Scaffold(
-        body: Stack(
-          children: [
-            const SvgImageLoader(assetName: Assets.background, fit: BoxFit.cover),
-            AnimatedBackground(
-              behaviour: BubblesBehaviour(),
-              vsync: this,
-              child: const SingleChildScrollView(child: HomeLayoutDesktop(),),
-            ),
-
-          ],
-        ),
+      return  const Scaffold(
+        body: HomeLayoutDesktop(),
       );
     }
     return Scaffold(

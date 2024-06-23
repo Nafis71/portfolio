@@ -13,6 +13,8 @@ class WebTextStyles {
           fontSize: 24,
           fontFamily: "Poppins Bold",
           fontWeight: FontWeight.bold),
+      titleSmall:const TextStyle(
+          fontSize: 14, fontFamily: "Poppins", color: Colors.grey) ,
       headlineMedium: const TextStyle(
           color: WebColor.webPrimaryColor,
           fontSize: 38,

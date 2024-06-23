@@ -8,4 +8,11 @@ class Assets{
   static const String linkedInIcon = "$iconPath/linkedin.svg";
   static const String githubIcon = "$iconPath/github.svg";
   static const String twitterIcon = "$iconPath/twitter.svg";
+  static const String flutterIcon = "$iconPath/flutter.svg";
+  static const String dartIcon = "$iconPath/dart.svg";
+  static const String firebaseIcon = "$iconPath/firebase.svg";
+  static const String javaIcon = "$iconPath/java.svg";
+  static const String restApiIcon = "$iconPath/restApi.svg";
+  static const String mongoDbIcon = "$iconPath/mongodb.svg";
+  static const String mysqlIcon = "$iconPath/mysql.svg";
 }
