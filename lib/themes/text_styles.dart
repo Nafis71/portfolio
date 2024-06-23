@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/web_color.dart';
 
-class WebTextStyles{
-  static TextTheme getTextStyle() => const TextTheme(
-    titleMedium: TextStyle(
-      color: WebColor.webPrimaryColor,
-      fontSize: 16,
-      fontFamily: "Poppins",
-      fontWeight: FontWeight.bold
-    ),
-    titleLarge: TextStyle(
-        color: WebColor.webPrimaryColor,
-        fontSize: 24,
+class WebTextStyles {
+  static TextTheme getTextStyle() => TextTheme(
+      titleMedium: const TextStyle(
+          color: WebColor.webPrimaryColor,
+          fontSize: 16,
+          fontFamily: "Poppins",
+          fontWeight: FontWeight.bold),
+      titleLarge: const TextStyle(
+          color: WebColor.webPrimaryColor,
+          fontSize: 24,
+          fontFamily: "Poppins Bold",
+          fontWeight: FontWeight.bold),
+      headlineMedium: const TextStyle(
+          color: WebColor.webPrimaryColor,
+          fontSize: 38,
+          fontFamily: "Poppins",
+          letterSpacing: 1,
+          fontWeight: FontWeight.bold),
+      headlineLarge: const TextStyle(
+        fontSize: 38,
         fontFamily: "Poppins Bold",
-        fontWeight: FontWeight.bold
-    ),
-  );
+        letterSpacing: 1,
+        fontWeight: FontWeight.normal,
+        color: WebColor.webPrimaryColor,
+      ),
+      labelLarge: TextStyle(
+          fontSize: 38,
+          fontFamily: "Poppins Bold",
+          letterSpacing: 0.2,
+          fontWeight: FontWeight.normal,
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2.3
+            ..color = WebColor.webPrimaryColor),
+      labelSmall: const TextStyle(
+          fontSize: 16, fontFamily: "Poppins", color: Colors.grey),);
 }

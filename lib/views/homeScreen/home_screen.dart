@@ -1,5 +1,8 @@
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/assets.dart';
 import 'package:portfolio/views/homeScreen/desktop/home_layout_desktop.dart';
+import 'package:portfolio/wrappers/svg_image_loader.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,18 +12,28 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    if(ResponsiveBreakpoints.of(context).isDesktop){
-      return const HomeLayoutDesktop();
+    if (ResponsiveBreakpoints.of(context).isDesktop) {
+      return const Scaffold(
+        body: Stack(
+          children: [
+            SvgImageLoader(assetName: Assets.background, fit: BoxFit.cover),
+            HomeLayoutDesktop()
+
+          ],
+        ),
+      );
     }
     return Scaffold(
-      body: Center(child: Container(
-        height: 120,
-        width: 200,
-        color: Colors.red,
-      ),),
+      body: Center(
+        child: Container(
+          height: 120,
+          width: 200,
+          color: Colors.red,
+        ),
+      ),
     );
   }
 }
