@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/widgets/intro_widget.dart';
+import 'package:portfolio/widgets/projects_widget.dart';
 
 import '../../../widgets/navbar_widget.dart';
 import '../../../widgets/skills_widget.dart';
@@ -58,11 +59,9 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
               const Gap(20),
               const SocialCardsWidget(),
               const Gap(20),
-              const Divider(
-                thickness: 0.4,
-              ),
-              const Gap(20),
               SkillsWidget(skillSectionKey: widget.skillSectionKey,),
+              const Gap(20),
+              ProjectsWidget(),
               const Gap(20),
             ],
           ),

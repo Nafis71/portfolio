@@ -3,6 +3,7 @@ class Assets{
   static const String imagePath = "$basePath/images";
   static const String iconPath = "$basePath/icons";
   static const String profilePicture = "$imagePath/profilePicture.jpg";
+  static const String taskManagerPicture = "$imagePath/taskmanager.png";
   static const String background = "$imagePath/background.svg";
   static const String facebookIcon = "$iconPath/facebook.svg";
   static const String linkedInIcon = "$iconPath/linkedin.svg";

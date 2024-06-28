@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +17,9 @@ class SkillsWidget extends StatelessWidget {
     return Column(
       children: [
         Row(
+          key: skillSectionKey,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Gap(100),
             RichText(
               text: TextSpan(children: [
                 TextSpan(
@@ -32,37 +33,35 @@ class SkillsWidget extends StatelessWidget {
           ],
         ),
         Row(
-          key: skillSectionKey,
           children: [
             const Gap(20),
             Expanded(
-                flex: 1,
+                flex: 2,
                 child: Consumer<PortfolioViewModel>(builder: (_,viewModel,__){
-                  return GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: (.3/.2),
-                        crossAxisSpacing: 10,
-
-                        crossAxisCount:
-                        (ResponsiveBreakpoints.of(context).isDesktop)
-                            ? 4
-                            : 2),
-                    itemCount: viewModel.skillData.length,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemBuilder: (context, index) => Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: MediaQuery.of(context).size.width * 0.025,),
-                          const Gap(10),
-                          Text(viewModel.skillData[index].skillName,style: Theme.of(context).textTheme.titleSmall,),
-                        ],
-                      ),
+                  return FlutterCarousel.builder(itemCount: viewModel.skillData.length, itemBuilder: (context,index,pageViewIndex) =>Container(
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: MediaQuery.of(context).size.width * 0.025,),
+                        const Gap(10),
+                        Text(viewModel.skillData[index].skillName,style: Theme.of(context).textTheme.titleSmall,),
+                      ],
                     ),
-                  );
+                  ), options: CarouselOptions(
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    aspectRatio: 1,
+                    autoPlay: true,
+                    viewportFraction: 0.2,
+                    initialPage: 3,
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayInterval: const Duration(milliseconds: 1600),
+                    enlargeCenterPage: true,
+                    pageSnapping: false,
+                    enableInfiniteScroll: true,
+                    floatingIndicator: false
+                  ));
                 },)
             ),
             Expanded(child: SizedBox(
