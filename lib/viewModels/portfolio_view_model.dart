@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/assets.dart';
 
+import '../models/project_data.dart';
 import '../models/skill_data.dart';
 import '../models/social_data.dart';
 
-class PortfolioViewModel extends ChangeNotifier{
+class PortfolioViewModel extends ChangeNotifier {
   List<SocialData> socialData = [
-    SocialData(socialLink: "https://facebook.com/nafishasantonmoy", iconPath: Assets.facebookIcon,color: Colors.white),
-    SocialData(socialLink: "https://linkedin.com/in/nafishasantonmoy", iconPath: Assets.linkedInIcon,color: Colors.white),
-    SocialData(socialLink: "https://github.com/Nafis71", iconPath: Assets.githubIcon,color: Colors.white),
-    SocialData(socialLink: "https://x.com/Nafis_71", iconPath: Assets.twitterIcon,color: Colors.white),
+    SocialData(
+        socialLink: "https://facebook.com/nafishasantonmoy",
+        iconPath: Assets.facebookIcon,
+        color: Colors.white),
+    SocialData(
+        socialLink: "https://linkedin.com/in/nafishasantonmoy",
+        iconPath: Assets.linkedInIcon,
+        color: Colors.white),
+    SocialData(
+        socialLink: "https://github.com/Nafis71",
+        iconPath: Assets.githubIcon,
+        color: Colors.white),
+    SocialData(
+        socialLink: "https://x.com/Nafis_71",
+        iconPath: Assets.twitterIcon,
+        color: Colors.white),
   ];
   List<SkillData> skillData = [
     SkillData(skillName: "Flutter", skillIcons: Assets.flutterIcon),
@@ -20,6 +33,26 @@ class PortfolioViewModel extends ChangeNotifier{
     SkillData(skillName: "Rest API", skillIcons: Assets.restApiIcon),
     SkillData(skillName: "Git", skillIcons: Assets.githubIcon),
     SkillData(skillName: "MySQL", skillIcons: Assets.mysqlIcon),
+  ];
+
+  List<ProjectData> projectData = [
+    ProjectData(
+        projectName: "Task Manager",
+        projectDescription:
+        "This Flutter application is a comprehensive task manager designed to empower users to stay organized and achieve their goals effectively. It offers a suite of features that cater to various task management needs, built with a focus on security and user experience.",
+        projectLink: "https://github.com/Nafis71/task_manager",
+        projectPicture: Assets.taskManagerPicture),
+    ProjectData(
+      projectName: "NimbusNow",
+      projectDescription:
+      "NimbusNow, your go-to weather app for staying prepared and informed! NimbusNow provides comprehensive weather updates with an emphasis on ease of use and visual appeal. Whether you need to check the current conditions, explore detailed forecasts, or simply enjoy a visually pleasing interface, NimbusNow has you covered.",
+      projectLink: "https://github.com/Nafis71/NimbusNow",
+      projectPicture: Assets.weatherAppPicture,
+    ),
+    ProjectData(projectName: "Glide Web",
+      projectDescription: "This Flutter-based browser app offers a feature-rich and user-friendly browsing experience. The home page includes a search bar, bookmarks, and a trending news section, with Google as the default search engine. Users can easily navigate the web by searching for content or entering URLs. Notable features include background playback for YouTube videos, transforming the browser into a music player, and integrated voice commands for hands-free searches. This browser is ideal for web browsing, staying updated on news, managing bookmarks, and enjoying YouTube music in the background.",
+      projectLink: "https://github.com/Nafis71/glide_web",
+      projectPicture: Assets.glideWebPicture,)
   ];
 
   void setSocialContainerColor(Color color, int index) {

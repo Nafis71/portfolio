@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/utils/assets.dart';
+import 'package:portfolio/viewModels/portfolio_view_model.dart';
+import 'package:provider/provider.dart';
+import 'dart:js' as js;
+
+import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class ProjectsWidget extends StatelessWidget {
-  const ProjectsWidget({super.key});
+  final GlobalKey projectSectionKey;
+  const ProjectsWidget({super.key, required this.projectSectionKey});
 
   @override
   Widget build(BuildContext context) {
@@ -24,52 +30,61 @@ class ProjectsWidget extends StatelessWidget {
           ],
         ),
         SizedBox(
-          child: ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (context, index) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 80, vertical: 40),
-              child: getContainer(index, context)
-            ),
-          ),
+          key: projectSectionKey,
+          child: Consumer<PortfolioViewModel>(builder: (_,viewModel,__){
+            return ListView.builder(
+              shrinkWrap: true,
+              primary: false,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: viewModel.projectData.length,
+              itemBuilder: (context, index) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 40),
+                  padding: const EdgeInsets.all(30),
+                  child: getContainer(index, context)
+              ),
+            );
+          },),
         ),
       ],
     );
   }
   Widget getContainer(int index, BuildContext context){
     if(index % 2 == 0){
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          projectImage(context),
-
-          projectDetails(index,context),
-        ],
+      return WidgetAnimator(
+        incomingEffect: WidgetTransitionEffects.incomingSlideInFromLeft(duration: Duration(seconds: 2)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            projectImage(context,index),
+            projectDetails(index,context),
+          ],
+        ),
       );
     }
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        projectDetails(index, context),
-        projectImage(context),
-      ],
+    return WidgetAnimator(
+      incomingEffect: WidgetTransitionEffects.incomingSlideInFromRight(duration: Duration(seconds: 2)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          projectDetails(index, context),
+          projectImage(context,index),
+        ],
+      ),
     );
     
   }
   
-  Widget projectImage(BuildContext context){
+  Widget projectImage(BuildContext context,int index){
     return Expanded(
       flex: 1,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Row(mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.33,
             width:  MediaQuery.of(context).size.width * 0.3,
             decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(Assets.taskManagerPicture),fit: BoxFit.fill
+                image: DecorationImage(
+                    image: AssetImage(context.read<PortfolioViewModel>().projectData[index].projectPicture),fit: BoxFit.fill
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [BoxShadow(
@@ -93,11 +108,16 @@ class ProjectsWidget extends StatelessWidget {
           const Gap(30),
           Text((index+1).toString().padLeft(2,"0"), style: Theme.of(context).textTheme.titleLarge,),
           const Gap(10),
-          Text("Task Manager",style: Theme.of(context).textTheme.titleLarge,),
+          Text(context.read<PortfolioViewModel>().projectData[index].projectName,style: Theme.of(context).textTheme.titleLarge,),
           const Gap(10),
-          Text( textAlign: TextAlign.justify,"This Flutter application is a comprehensive task manager designed to empower users to stay organized and achieve their goals effectively. It offers a suite of features that cater to various task management needs, built with a focus on security and user experience.",style: Theme.of(context).textTheme.labelSmall,),
+          Text( textAlign: TextAlign.justify,context.read<PortfolioViewModel>().projectData[index].projectDescription,style: Theme.of(context).textTheme.labelSmall,),
           const Gap(20),
-          Icon(Icons.open_in_new,size: 27,)
+          InkWell(
+              splashColor: Colors.transparent,
+              onTap: (){
+                js.context.callMethod("open",[context.read<PortfolioViewModel>().projectData[index].projectLink]);
+              },
+              child: Icon(Icons.open_in_new,size: 27,))
         ],
       ),
     );

@@ -61,7 +61,7 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
               const Gap(20),
               SkillsWidget(skillSectionKey: widget.skillSectionKey,),
               const Gap(20),
-              ProjectsWidget(),
+              ProjectsWidget(projectSectionKey: widget.projectSectionKey,),
               const Gap(20),
             ],
           ),

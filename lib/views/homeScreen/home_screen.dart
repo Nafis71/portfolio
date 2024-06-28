@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {
+      print(Scrollable.of(context).mounted);
       Scrollable.ensureVisible(context,
           duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
