@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/utils/assets.dart';
 import 'package:portfolio/viewModels/portfolio_view_model.dart';
@@ -13,6 +14,7 @@ class ProjectsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("object");
     return Column(
       children: [
         Wrap(
@@ -52,54 +54,56 @@ class ProjectsWidget extends StatelessWidget {
     if(index % 2 == 0){
       return WidgetAnimator(
         incomingEffect: WidgetTransitionEffects.incomingSlideInFromLeft(duration: Duration(seconds: 2)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            projectImage(context,index),
-            projectDetails(index,context),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Row(
+              children: [
+                projectImage(context,index,constraints.maxWidth),
+                const Gap(100),
+                projectDetails(index,context),
+              ],
+            );
+          }
         ),
       );
     }
     return WidgetAnimator(
       incomingEffect: WidgetTransitionEffects.incomingSlideInFromRight(duration: Duration(seconds: 2)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          projectDetails(index, context),
-          projectImage(context,index),
-        ],
+      child: LayoutBuilder(
+        builder: (context,constraints) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              projectDetails(index, context),
+              const Gap(100),
+              projectImage(context,index,constraints.maxWidth),
+            ],
+          );
+        }
       ),
     );
-    
+
   }
-  
-  Widget projectImage(BuildContext context,int index){
-    return Expanded(
-      flex: 1,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.33,
-            width:  MediaQuery.of(context).size.width * 0.3,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(context.read<PortfolioViewModel>().projectData[index].projectPicture),fit: BoxFit.fill
-                ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 30,
-                    offset: const Offset(0, 10)
-                )]
-            ),
+
+  Widget projectImage(BuildContext context,int index, double maxWidth){
+    return Container(
+      height: MediaQuery.of(context).size.width * 0.18,
+      width:  maxWidth * 0.35,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(context.read<PortfolioViewModel>().projectData[index].projectPicture),fit: BoxFit.fill
           ),
-        ],
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 5,
+              blurRadius: 30,
+              offset: const Offset(0, 10)
+          )]
       ),
     );
   }
-  
+
   Widget projectDetails(int index, BuildContext context){
     return Expanded(
       child: Column(
@@ -109,6 +113,13 @@ class ProjectsWidget extends StatelessWidget {
           Text((index+1).toString().padLeft(2,"0"), style: Theme.of(context).textTheme.titleLarge,),
           const Gap(10),
           Text(context.read<PortfolioViewModel>().projectData[index].projectName,style: Theme.of(context).textTheme.titleLarge,),
+          const Gap(10),
+          Wrap(children: context.read<PortfolioViewModel>().projectData[index].projectTechStacks.map((element) => Container(
+            width: 20,
+            height: 20,
+            margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+            child: SvgPicture.asset(element),
+          ),).toList()),
           const Gap(10),
           Text( textAlign: TextAlign.justify,context.read<PortfolioViewModel>().projectData[index].projectDescription,style: Theme.of(context).textTheme.labelSmall,),
           const Gap(20),

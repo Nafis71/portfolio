@@ -41,18 +41,19 @@ class PortfolioViewModel extends ChangeNotifier {
         projectDescription:
         "This Flutter application is a comprehensive task manager designed to empower users to stay organized and achieve their goals effectively. It offers a suite of features that cater to various task management needs, built with a focus on security and user experience.",
         projectLink: "https://github.com/Nafis71/task_manager",
-        projectPicture: Assets.taskManagerPicture),
+        projectPicture: Assets.taskManagerPicture, projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,]),
     ProjectData(
       projectName: "NimbusNow",
       projectDescription:
       "NimbusNow, your go-to weather app for staying prepared and informed! NimbusNow provides comprehensive weather updates with an emphasis on ease of use and visual appeal. Whether you need to check the current conditions, explore detailed forecasts, or simply enjoy a visually pleasing interface, NimbusNow has you covered.",
       projectLink: "https://github.com/Nafis71/NimbusNow",
       projectPicture: Assets.weatherAppPicture,
+        projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,]
     ),
     ProjectData(projectName: "Glide Web",
       projectDescription: "This Flutter-based browser app offers a feature-rich and user-friendly browsing experience. The home page includes a search bar, bookmarks, and a trending news section, with Google as the default search engine. Users can easily navigate the web by searching for content or entering URLs. Notable features include background playback for YouTube videos, transforming the browser into a music player, and integrated voice commands for hands-free searches. This browser is ideal for web browsing, staying updated on news, managing bookmarks, and enjoying YouTube music in the background.",
       projectLink: "https://github.com/Nafis71/glide_web",
-      projectPicture: Assets.glideWebPicture,)
+      projectPicture: Assets.glideWebPicture,projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,])
   ];
 
   void setSocialContainerColor(Color color, int index) {
