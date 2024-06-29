@@ -42,7 +42,7 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
           height: MediaQuery.of(context).size.height,
           child: AnimatedBackground(
             behaviour: RandomParticleBehaviour(options: const ParticleOptions(
-              particleCount: 30,
+              particleCount: 20,
               maxOpacity: 0.2,
               spawnMaxSpeed: 170
             )),
@@ -63,7 +63,7 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
               ),
               const IntroWidget(),
               const SocialCardsWidget(),
-              (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(20) : const Gap(60),
+              (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(30) : const Gap(60),
               SkillsWidget(skillSectionKey: widget.skillSectionKey,),
               const Gap(20),
               ProjectsWidget(projectSectionKey: widget.projectSectionKey,),

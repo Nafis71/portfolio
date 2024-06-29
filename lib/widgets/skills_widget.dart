@@ -32,6 +32,7 @@ class SkillsWidget extends StatelessWidget {
             ),
           ],
         ),
+        !ResponsiveBreakpoints.of(context).isDesktop ? mobileScrollingAnimation(context) : const SizedBox.shrink(),
         Row(
           children: [
             const Gap(20),
@@ -44,7 +45,7 @@ class SkillsWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: MediaQuery.of(context).size.width * 0.025,),
+                        SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: (ResponsiveBreakpoints.of(context).isDesktop) ? MediaQuery.of(context).size.width * 0.025 : MediaQuery.of(context).size.width * 0.1,),
                         const Gap(10),
                         Text(viewModel.skillData[index].skillName,style: Theme.of(context).textTheme.titleSmall,),
                       ],
@@ -64,13 +65,16 @@ class SkillsWidget extends StatelessWidget {
                   ));
                 },)
             ),
-            Expanded(child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-              child: Lottie.asset("assets/lotties/mobile.json",fit: BoxFit.contain,renderCache: RenderCache.drawingCommands),
-            ))
+            (ResponsiveBreakpoints.of(context).isDesktop) ? Expanded(child: mobileScrollingAnimation(context)) : const SizedBox.shrink(),
           ],
         ),
       ],
+    );
+  }
+  Widget mobileScrollingAnimation(BuildContext context){
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: Lottie.asset("assets/lotties/mobile.json",fit: BoxFit.contain,renderCache: RenderCache.drawingCommands),
     );
   }
 }
