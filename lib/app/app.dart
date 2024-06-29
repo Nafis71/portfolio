@@ -3,6 +3,7 @@ import 'package:portfolio/app/scroll_behavior.dart';
 import 'package:portfolio/themes/elevated_button_styles.dart';
 import 'package:portfolio/themes/text_button_styles.dart';
 import 'package:portfolio/themes/text_styles.dart';
+import 'package:portfolio/themes/textfield_style.dart';
 import 'package:portfolio/utils/web_color.dart';
 import 'package:portfolio/viewModels/portfolio_view_model.dart';
 import 'package:portfolio/views/homeScreen/home_screen.dart';
@@ -30,7 +31,7 @@ class _PortfolioState extends State<Portfolio> {
           child: child!,
           breakpoints: [
             const Breakpoint(start: 0, end: 450, name: MOBILE),
-            const Breakpoint(start: 720, end: 1920, name: DESKTOP),
+            const Breakpoint(start: 769, end: 1920, name: DESKTOP),
           ],
         ),
         theme: ThemeData(
@@ -38,6 +39,7 @@ class _PortfolioState extends State<Portfolio> {
           elevatedButtonTheme: ElevatedButtonStyles.getElevatedButtonStyles(),
           scaffoldBackgroundColor: WebColor.scaffoldBackgroundColor,
           textButtonTheme: TextButtonStyles.getTextButtonStyle(),
+          inputDecorationTheme: TextFieldStyle.getTextFieldStyle(),
         ),
         scrollBehavior: AppScrollBehaviour(),
       ),

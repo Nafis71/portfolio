@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {
-      print(Scrollable.of(context).mounted);
       Scrollable.ensureVisible(context,
           duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
@@ -40,12 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
     return Scaffold(
-      body: Center(
-        child: Container(
-          height: 120,
-          width: 200,
-          color: Colors.red,
-        ),
+      body: HomeLayoutDesktop(
+        skillSectionKey: _skillSectionKey,
+        aboutSectionKey: _aboutSectionKey,
+        projectSectionKey: _projectSectionKey,
+        contactMeSectionKey: _contactMeSectionKey,
+        scrollController: scrollController,
+        scrollToSection: _scrollToSection,
       ),
     );
   }

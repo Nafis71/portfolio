@@ -38,5 +38,5 @@ class WebTextStyles {
             ..strokeWidth = 2.3
             ..color = WebColor.webPrimaryColor),
       labelSmall: const TextStyle(
-          fontSize: 16, fontFamily: "Poppins", color: Colors.grey),);
+          fontSize: 14, fontFamily: "Poppins", color: Colors.grey),);
 }

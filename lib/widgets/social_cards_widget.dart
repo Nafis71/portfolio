@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 import '../utils/web_color.dart';
@@ -18,7 +19,7 @@ class SocialCardsWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Gap(100),
+          (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(100) : const Gap(30),
           Expanded(
             child: WidgetAnimator(
               incomingEffect: WidgetTransitionEffects.incomingScaleUp(

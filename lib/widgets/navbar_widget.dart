@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class NavbarWidget extends StatelessWidget {
   final Function(GlobalKey key) scrollToSection;
@@ -25,38 +26,8 @@ class NavbarWidget extends StatelessWidget {
                 .textTheme
                 .titleLarge,
           ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {scrollToSection(aboutSectionKey);},
-                child: const Text(
-                  "About Me",
-                ),
-              ),
-              const Gap(30),
-              TextButton(
-                onPressed: () {
-                  scrollToSection(skillSectionKey);
-                },
-                child: const Text("Skills"),
-              ),
-              const Gap(30),
-              TextButton(
-                onPressed: () {scrollToSection(projectSectionKey);},
-                child: const Text(
-                  "Projects",
-                ),
-              ),
-              const Gap(30),
-              TextButton(
-                onPressed: () {scrollToSection(contactMeSectionKey);},
-                child: const Text(
-                  "Contact Me",
-                ),
-              ),
-            ],
-          ),
-          ElevatedButton.icon(
+          (ResponsiveBreakpoints.of(context).isDesktop) ? desktopRow() : SizedBox.shrink(),
+          (ResponsiveBreakpoints.of(context).isDesktop) ? ElevatedButton.icon(
             onPressed: () {},
             label: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,9 +37,42 @@ class NavbarWidget extends StatelessWidget {
                 Icon(Icons.download_outlined)
               ],
             ),
-          ),
+          ) : const Icon(Icons.menu,size: 27,),
         ],
       ),
+    );
+  }
+  Widget desktopRow(){
+    return Row(
+      children: [
+        TextButton(
+          onPressed: () {scrollToSection(aboutSectionKey);},
+          child: const Text(
+            "About Me",
+          ),
+        ),
+        const Gap(30),
+        TextButton(
+          onPressed: () {
+            scrollToSection(skillSectionKey);
+          },
+          child: const Text("Skills"),
+        ),
+        const Gap(30),
+        TextButton(
+          onPressed: () {scrollToSection(projectSectionKey);},
+          child: const Text(
+            "Projects",
+          ),
+        ),
+        const Gap(30),
+        TextButton(
+          onPressed: () {scrollToSection(contactMeSectionKey);},
+          child: const Text(
+            "Contact Me",
+          ),
+        ),
+      ],
     );
   }
 }

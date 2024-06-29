@@ -2,8 +2,10 @@ import 'package:animated_background/animated_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:portfolio/widgets/contact_me_widget.dart';
 import 'package:portfolio/widgets/intro_widget.dart';
 import 'package:portfolio/widgets/projects_widget.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../widgets/navbar_widget.dart';
 import '../../../widgets/skills_widget.dart';
@@ -39,7 +41,11 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
         SizedBox(
           height: MediaQuery.of(context).size.height,
           child: AnimatedBackground(
-            behaviour: BubblesBehaviour(),
+            behaviour: RandomParticleBehaviour(options: const ParticleOptions(
+              particleCount: 30,
+              maxOpacity: 0.2,
+              spawnMaxSpeed: 170
+            )),
             vsync: this,
             child: const SizedBox.shrink(),
           ),
@@ -56,12 +62,13 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
                 contactMeSectionKey: widget.contactMeSectionKey,
               ),
               const IntroWidget(),
-              const Gap(20),
               const SocialCardsWidget(),
-              const Gap(20),
+              (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(20) : const Gap(60),
               SkillsWidget(skillSectionKey: widget.skillSectionKey,),
               const Gap(20),
               ProjectsWidget(projectSectionKey: widget.projectSectionKey,),
+              const Gap(20),
+              const ContactMeWidget(),
               const Gap(20),
             ],
           ),
