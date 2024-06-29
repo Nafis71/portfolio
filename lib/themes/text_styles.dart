@@ -37,6 +37,11 @@ class WebTextStyles {
             ..style = PaintingStyle.stroke
             ..strokeWidth = 2.3
             ..color = WebColor.webPrimaryColor),
+      labelMedium: const TextStyle(
+        fontSize: 16,
+        fontFamily: "Poppins",
+        color: Colors.white,
+      ),
       labelSmall: const TextStyle(
           fontSize: 14, fontFamily: "Poppins", color: Colors.grey),);
 }

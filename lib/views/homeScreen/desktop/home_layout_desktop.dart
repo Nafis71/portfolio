@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/widgets/contact_me_widget.dart';
+import 'package:portfolio/widgets/footer_widget.dart';
 import 'package:portfolio/widgets/intro_widget.dart';
 import 'package:portfolio/widgets/projects_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -68,8 +69,9 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
               const Gap(20),
               ProjectsWidget(projectSectionKey: widget.projectSectionKey,),
               const Gap(20),
-              const ContactMeWidget(),
+              ContactMeWidget(contactMeSectionKey: widget.contactMeSectionKey,),
               const Gap(20),
+              const FooterWidget()
             ],
           ),
         )

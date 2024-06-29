@@ -64,18 +64,23 @@ class IntroWidget extends StatelessWidget {
                     incomingEffect:
                     WidgetTransitionEffects.incomingSlideInFromLeft(
                         duration: const Duration(seconds: 4)),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: RichText(
-                          textAlign: TextAlign.justify,
-                          text: TextSpan(
-                          children: [
-                            TextSpan(
-                                style: Theme.of(context).textTheme.labelSmall,
-                                text:
-                                "Enthusiastic and recently graduated Flutter developer eager to leverage my skills and knowledge to contribute to a fast-paced and collaborative development environment. Possess a strong foundation in Flutter development principles and a passion for creating beautiful and user-friendly mobile applications.\n")
-                          ]
-                      )),
+                    child: LayoutBuilder(
+                      builder: (context,constraints) {
+                        final bool isDesktop = constraints.maxWidth > 768;
+                        return SizedBox(
+                          width: (isDesktop) ? constraints.maxWidth * 0.6 : constraints.maxWidth * 0.92,
+                          child: RichText(
+                              textAlign: TextAlign.justify,
+                              text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    style: Theme.of(context).textTheme.labelSmall,
+                                    text:
+                                    "Enthusiastic and recently graduated Flutter developer eager to leverage my skills and knowledge to contribute to a fast-paced and collaborative development environment. Possess a strong foundation in Flutter development principles and a passion for creating beautiful and user-friendly mobile applications.\n")
+                              ]
+                          )),
+                        );
+                      }
                     ),
                   )
                 ],

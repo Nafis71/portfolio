@@ -45,14 +45,13 @@ class SkillsWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: (ResponsiveBreakpoints.of(context).isDesktop) ? MediaQuery.of(context).size.width * 0.025 : MediaQuery.of(context).size.width * 0.1,),
+                        SvgImageLoader(assetName: viewModel.skillData[index].skillIcons, fit: BoxFit.contain,width: (ResponsiveBreakpoints.of(context).isDesktop) ? MediaQuery.of(context).size.width * 0.024 : MediaQuery.of(context).size.width * 0.1,),
                         const Gap(10),
                         Text(viewModel.skillData[index].skillName,style: Theme.of(context).textTheme.titleSmall,),
                       ],
                     ),
                   ), options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height * 0.25,
-                    aspectRatio: 1,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     autoPlay: true,
                     viewportFraction: 0.2,
                     initialPage: 3,
