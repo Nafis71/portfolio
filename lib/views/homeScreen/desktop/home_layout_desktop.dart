@@ -43,8 +43,8 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
           height: MediaQuery.of(context).size.height,
           child: AnimatedBackground(
             behaviour: RandomParticleBehaviour(options: const ParticleOptions(
-              particleCount: 20,
-              maxOpacity: 0.2,
+              particleCount: 15,
+              maxOpacity: 0.15,
               spawnMaxSpeed: 170
             )),
             vsync: this,

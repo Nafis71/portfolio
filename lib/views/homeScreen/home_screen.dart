@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/views/homeScreen/desktop/home_layout_desktop.dart';
+import 'package:portfolio/widgets/navigation_drawer_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,8 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (ResponsiveBreakpoints.of(context).isDesktop) {
-      return Scaffold(
+    return Scaffold(
         body: HomeLayoutDesktop(
           skillSectionKey: _skillSectionKey,
           aboutSectionKey: _aboutSectionKey,
@@ -36,17 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollController: scrollController,
           scrollToSection: _scrollToSection,
         ),
-      );
-    }
-    return Scaffold(
-      body: HomeLayoutDesktop(
-        skillSectionKey: _skillSectionKey,
-        aboutSectionKey: _aboutSectionKey,
-        projectSectionKey: _projectSectionKey,
-        contactMeSectionKey: _contactMeSectionKey,
-        scrollController: scrollController,
-        scrollToSection: _scrollToSection,
-      ),
-    );
+        endDrawer: NavigationDrawerWidget(
+          scrollToSection: _scrollToSection,
+          skillSectionKey: _skillSectionKey,
+          aboutSectionKey: _aboutSectionKey,
+          projectSectionKey: _projectSectionKey,
+          contactMeSectionKey: _contactMeSectionKey,
+        ));
   }
 }

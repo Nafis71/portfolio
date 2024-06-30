@@ -41,7 +41,11 @@ class NavbarWidget extends StatelessWidget {
                 Icon(Icons.download_outlined)
               ],
             ),
-          ) : const Icon(Icons.menu,size: 27,),
+          ) : InkWell(
+              onTap: (){
+                Scaffold.of(context).openEndDrawer();
+              },
+              child: const Icon(Icons.menu,size: 27,)),
         ],
       ),
     );
