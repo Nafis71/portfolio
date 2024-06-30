@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/assets.dart';
-
+import 'package:web/web.dart';
+import 'dart:ui_web' as ui;
 import '../models/project_data.dart';
 import '../models/skill_data.dart';
 import '../models/social_data.dart';
@@ -60,4 +61,9 @@ class PortfolioViewModel extends ChangeNotifier {
     socialData[index].color = color;
     notifyListeners();
   }
+
+  void downloadResume(){
+    HTMLAnchorElement()..href = ui.AssetManager().getAssetUrl(Assets.myResume)..download = "Resume.pdf"..click();
+  }
+
 }

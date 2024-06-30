@@ -18,4 +18,6 @@ class Assets{
   static const String restApiIcon = "$iconPath/restApi.svg";
   static const String mongoDbIcon = "$iconPath/mongodb.svg";
   static const String mysqlIcon = "$iconPath/mysql.svg";
+  static const String myResumePath = "$basePath/pdfs";
+  static const String myResume = "$myResumePath/resume.pdf";
 }

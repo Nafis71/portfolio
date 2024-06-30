@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:portfolio/viewModels/portfolio_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class NavbarWidget extends StatelessWidget {
@@ -26,9 +28,11 @@ class NavbarWidget extends StatelessWidget {
                 .textTheme
                 .titleLarge,
           ),
-          (ResponsiveBreakpoints.of(context).isDesktop) ? desktopRow() : SizedBox.shrink(),
+          (ResponsiveBreakpoints.of(context).isDesktop) ? desktopRow() : const SizedBox.shrink(),
           (ResponsiveBreakpoints.of(context).isDesktop) ? ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              context.read<PortfolioViewModel>().downloadResume();
+            },
             label: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
