@@ -2,7 +2,7 @@ class Assets{
   static const String basePath = "assets";
   static const String imagePath = "$basePath/images";
   static const String iconPath = "$basePath/icons";
-  static const String profilePicture = "$imagePath/profilePicture.jpg";
+  static const String profilePicture = "$imagePath/profilePicture.png";
   static const String taskManagerPicture = "$imagePath/taskmanager.png";
   static const String weatherAppPicture = "$imagePath/weatherapp.png";
   static const String glideWebPicture = "$imagePath/glideweb.png";

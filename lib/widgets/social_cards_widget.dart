@@ -24,6 +24,7 @@ class SocialCardsWidget extends StatelessWidget {
               incomingEffect: WidgetTransitionEffects.incomingScaleUp(
                   duration: const Duration(seconds: 3),
                   delay: const Duration(seconds: 2)),
+              atRestEffect: WidgetRestingEffects.size(numberOfPlays: 1),
               child: Consumer<PortfolioViewModel>(
                 builder: (_, viewModel, __) {
                   return ListView.separated(
