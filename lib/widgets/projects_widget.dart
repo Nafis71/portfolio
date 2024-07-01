@@ -69,7 +69,7 @@ class ProjectsWidget extends StatelessWidget {
           duration: const Duration(seconds: 2)),
       child: Column(
         children: [
-          projectImage(context, index, constraints.maxWidth * 0.5,
+          projectImage(context, index, constraints.maxWidth * 0.7,
               maxHeight: constraints.maxWidth * 0.35),
           const Gap(20),
           projectDetails(index, context),
