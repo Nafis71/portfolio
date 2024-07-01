@@ -1,6 +1,3 @@
-import 'dart:js' as js;
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -36,62 +33,67 @@ class ProjectsWidget extends StatelessWidget {
           key: projectSectionKey,
           child: Consumer<PortfolioViewModel>(
             builder: (_, viewModel, __) {
-              return LayoutBuilder(
-                builder: (context,constraints) {
-                  final bool isDesktop = constraints.maxWidth > 769;
-                  return ListView.builder(
+              return LayoutBuilder(builder: (context, constraints) {
+                final bool isDesktop = constraints.maxWidth > 769;
+                return ListView.builder(
                     shrinkWrap: true,
                     primary: false,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: viewModel.projectData.length,
                     itemBuilder: (context, index) {
-                      return (isDesktop) ? Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 100, vertical: 40),
-                          padding: const EdgeInsets.all(30),
-                          child: getContainerDesktop(index, context)) : Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 40),
-                          padding: const EdgeInsets.all(30),
-                          child: getContainerMobile(index, context,constraints));
-                    }
-                  );
-                }
-              );
+                      return (isDesktop)
+                          ? Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 100, vertical: 40),
+                              padding: const EdgeInsets.all(30),
+                              child: getContainerDesktop(index, context))
+                          : Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 40),
+                              padding: const EdgeInsets.all(30),
+                              child: getContainerMobile(
+                                  index, context, constraints));
+                    });
+              });
             },
           ),
         ),
       ],
     );
   }
-  
-  Widget getContainerMobile(int index, BuildContext context, BoxConstraints constraints){
+
+  Widget getContainerMobile(
+      int index, BuildContext context, BoxConstraints constraints) {
     return WidgetAnimator(
-      incomingEffect: WidgetTransitionEffects.incomingSlideInFromLeft(duration: const Duration(seconds: 2)),
-      child: Column(children: [
-        projectImage(context, index, constraints.maxWidth * 0.5,maxHeight: constraints.maxWidth * 0.35),
-        const Gap(20),
-        projectDetails(index, context),
-      ],),
+      incomingEffect: WidgetTransitionEffects.incomingSlideInFromLeft(
+          duration: const Duration(seconds: 2)),
+      child: Column(
+        children: [
+          projectImage(context, index, constraints.maxWidth * 0.5,
+              maxHeight: constraints.maxWidth * 0.35),
+          const Gap(20),
+          projectDetails(index, context),
+        ],
+      ),
     );
   }
-  
+
   Widget getContainerDesktop(int index, BuildContext context) {
     if (index % 2 == 0) {
       return WidgetAnimator(
         incomingEffect: WidgetTransitionEffects.incomingSlideInFromLeft(
             duration: const Duration(seconds: 2)),
-        child: LayoutBuilder(
-          builder: (context,constraints) {
-            return Row(
-              children: [
-                Flexible(child: projectImage(context, index, constraints.maxWidth * 0.35)),
-                const Gap(100),
-                Expanded(child: projectDetails(index, context)),
-              ],
-            );
-          }
-        ),
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Row(
+            children: [
+              Flexible(
+                  child: projectImage(
+                      context, index, constraints.maxWidth * 0.35)),
+              const Gap(100),
+              Expanded(child: projectDetails(index, context)),
+            ],
+          );
+        }),
       );
     }
     return WidgetAnimator(
@@ -103,16 +105,21 @@ class ProjectsWidget extends StatelessWidget {
           children: [
             Expanded(child: projectDetails(index, context)),
             const Gap(100),
-            Flexible(child: projectImage(context, index, constraints.maxWidth * 0.35)),
+            Flexible(
+                child:
+                    projectImage(context, index, constraints.maxWidth * 0.35)),
           ],
         );
       }),
     );
   }
 
-  Widget projectImage(BuildContext context, int index, double maxWidth, {double? maxHeight}) {
+  Widget projectImage(BuildContext context, int index, double maxWidth,
+      {double? maxHeight}) {
     return Container(
-      height: (maxHeight != null)? maxHeight : MediaQuery.of(context).size.width * 0.18,
+      height: (maxHeight != null)
+          ? maxHeight
+          : MediaQuery.of(context).size.width * 0.18,
       width: maxWidth,
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -156,8 +163,8 @@ class ProjectsWidget extends StatelessWidget {
                   (element) => Container(
                     width: 20,
                     height: 20,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 5, vertical: 2),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                     child: SvgPicture.asset(element),
                   ),
                 )
@@ -175,12 +182,12 @@ class ProjectsWidget extends StatelessWidget {
         InkWell(
           splashColor: Colors.transparent,
           onTap: () {
-            js.context.callMethod("open", [
-              context
-                  .read<PortfolioViewModel>()
-                  .projectData[index]
-                  .projectLink
-            ]);
+            context.read<PortfolioViewModel>().launch(
+                context
+                    .read<PortfolioViewModel>()
+                    .projectData[index]
+                    .projectLink,
+                isNewTab: true);
           },
           child: const Icon(
             Icons.open_in_new,

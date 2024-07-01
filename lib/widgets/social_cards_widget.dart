@@ -7,7 +7,6 @@ import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import '../utils/web_color.dart';
 import '../viewModels/portfolio_view_model.dart';
 import '../wrappers/svg_image_loader.dart';
-import 'dart:js' as js;
 
 class SocialCardsWidget extends StatelessWidget {
   const SocialCardsWidget({super.key});
@@ -42,8 +41,9 @@ class SocialCardsWidget extends StatelessWidget {
                         }
                       },
                       onTap: () {
-                        js.context.callMethod(
-                            'open', [viewModel.socialData[index].socialLink]);
+                        context.read<PortfolioViewModel>().launch(
+                            viewModel.socialData[index].socialLink,
+                            isNewTab: true);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),

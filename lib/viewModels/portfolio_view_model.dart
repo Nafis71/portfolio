@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/assets.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:web/web.dart';
 import 'dart:ui_web' as ui;
 import '../models/project_data.dart';
@@ -64,6 +65,13 @@ class PortfolioViewModel extends ChangeNotifier {
 
   void downloadResume(){
     HTMLAnchorElement()..href = ui.AssetManager().getAssetUrl(Assets.myResume)..download = "Resume.pdf"..click();
+  }
+
+  Future<void> launch(String url, {bool isNewTab = true}) async {
+    await launchUrl(
+      Uri.parse(url),
+      webOnlyWindowName: isNewTab ? '_blank' : '_self',
+    );
   }
 
 }
