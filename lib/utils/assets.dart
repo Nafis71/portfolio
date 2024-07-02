@@ -6,6 +6,7 @@ class Assets{
   static const String taskManagerPicture = "$imagePath/taskmanager.png";
   static const String weatherAppPicture = "$imagePath/weatherapp.png";
   static const String glideWebPicture = "$imagePath/glideweb.png";
+  static const String bmiCalculatorPicture = "$imagePath/bmiCalculator.png";
   static const String background = "$imagePath/background.svg";
   static const String facebookIcon = "$iconPath/facebook.svg";
   static const String linkedInIcon = "$iconPath/linkedin.svg";
@@ -18,6 +19,7 @@ class Assets{
   static const String restApiIcon = "$iconPath/restApi.svg";
   static const String mongoDbIcon = "$iconPath/mongodb.svg";
   static const String mysqlIcon = "$iconPath/mysql.svg";
+  static const String androidIcon = "$iconPath/android.svg";
   static const String myResumePath = "$basePath/pdfs";
   static const String myResume = "$myResumePath/resume.pdf";
 }

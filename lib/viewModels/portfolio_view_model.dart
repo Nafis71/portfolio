@@ -8,6 +8,7 @@ import '../models/skill_data.dart';
 import '../models/social_data.dart';
 
 class PortfolioViewModel extends ChangeNotifier {
+  bool _isProjectViewLimited = true;
   List<SocialData> socialData = [
     SocialData(
         socialLink: "https://facebook.com/nafishasantonmoy",
@@ -41,30 +42,62 @@ class PortfolioViewModel extends ChangeNotifier {
     ProjectData(
         projectName: "Task Manager",
         projectDescription:
-        "This Flutter application is a comprehensive task manager designed to empower users to stay organized and achieve their goals effectively. It offers a suite of features that cater to various task management needs, built with a focus on security and user experience.",
+            "This Flutter application is a comprehensive task manager designed to empower users to stay organized and achieve their goals effectively. It offers a suite of features that cater to various task management needs, built with a focus on security and user experience.",
         projectLink: "https://github.com/Nafis71/task_manager",
-        projectPicture: Assets.taskManagerPicture, projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,]),
+        projectPicture: Assets.taskManagerPicture,
+        projectTechStacks: [
+          Assets.flutterIcon,
+          Assets.dartIcon,
+          Assets.restApiIcon,
+        ]),
     ProjectData(
-      projectName: "NimbusNow",
-      projectDescription:
-      "NimbusNow, your go-to weather app for staying prepared and informed! NimbusNow provides comprehensive weather updates with an emphasis on ease of use and visual appeal. Whether you need to check the current conditions, explore detailed forecasts, or simply enjoy a visually pleasing interface, NimbusNow has you covered.",
-      projectLink: "https://github.com/Nafis71/NimbusNow",
-      projectPicture: Assets.weatherAppPicture,
-        projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,]
-    ),
-    ProjectData(projectName: "Glide Web",
-      projectDescription: "This Flutter-based browser app offers a feature-rich and user-friendly browsing experience. The home page includes a search bar, bookmarks, and a trending news section, with Google as the default search engine. Users can easily navigate the web by searching for content or entering URLs. Notable features include background playback for YouTube videos, transforming the browser into a music player, and integrated voice commands for hands-free searches. This browser is ideal for web browsing, staying updated on news, managing bookmarks, and enjoying YouTube music in the background.",
-      projectLink: "https://github.com/Nafis71/glide_web",
-      projectPicture: Assets.glideWebPicture,projectTechStacks: [Assets.flutterIcon,Assets.dartIcon,Assets.restApiIcon,])
+        projectName: "NimbusNow",
+        projectDescription:
+            "NimbusNow, your go-to weather app for staying prepared and informed! NimbusNow provides comprehensive weather updates with an emphasis on ease of use and visual appeal. Whether you need to check the current conditions, explore detailed forecasts, or simply enjoy a visually pleasing interface, NimbusNow has you covered.",
+        projectLink: "https://github.com/Nafis71/NimbusNow",
+        projectPicture: Assets.weatherAppPicture,
+        projectTechStacks: [
+          Assets.flutterIcon,
+          Assets.dartIcon,
+          Assets.restApiIcon,
+        ]),
+    ProjectData(
+        projectName: "Glide Web",
+        projectDescription:
+            "This Flutter-based browser app offers a feature-rich and user-friendly browsing experience. The home page includes a search bar, bookmarks, and a trending news section, with Google as the default search engine. Users can easily navigate the web by searching for content or entering URLs. Notable features include background playback for YouTube videos, transforming the browser into a music player, and integrated voice commands for hands-free searches. This browser is ideal for web browsing, staying updated on news, managing bookmarks, and enjoying YouTube music in the background.",
+        projectLink: "https://github.com/Nafis71/glide_web",
+        projectPicture: Assets.glideWebPicture,
+        projectTechStacks: [
+          Assets.flutterIcon,
+          Assets.dartIcon,
+          Assets.restApiIcon,
+        ]),
+    ProjectData(
+        projectName: "BMI Calculator",
+        projectDescription:
+            "The BMI calculator is an app that can calculate an individual's BMI based on their height and weight, for both adults and nonadults. Additionally, its UI is attractive, and it is so user-friendly that individuals of all ages can easily use it.",
+        projectLink: "https://github.com/Nafis71/bmi_calculator",
+        projectPicture: Assets.bmiCalculatorPicture,
+        projectTechStacks: [Assets.flutterIcon, Assets.dartIcon]),
   ];
+
+  bool get isProjectViewLimited => _isProjectViewLimited;
+
+  set setIsProjectViewLimited(bool value) {
+    _isProjectViewLimited = value;
+    notifyListeners();
+  }
 
   void setSocialContainerColor(Color color, int index) {
     socialData[index].color = color;
     notifyListeners();
   }
 
-  void downloadResume(){
-    HTMLAnchorElement()..href = ui.AssetManager().getAssetUrl(Assets.myResume)..download = "Resume.pdf"..click();
+  void downloadResume() {
+    HTMLAnchorElement()
+      ..href = ui.AssetManager().getAssetUrl(Assets.myResume)
+      ..download = "Resume.pdf"
+      ..click();
   }
 
   Future<void> launch(String url, {bool isNewTab = true}) async {
@@ -73,5 +106,4 @@ class PortfolioViewModel extends ChangeNotifier {
       webOnlyWindowName: isNewTab ? '_blank' : '_self',
     );
   }
-
 }

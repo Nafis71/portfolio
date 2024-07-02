@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/viewModels/portfolio_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class ProjectsWidget extends StatelessWidget {
@@ -35,25 +34,35 @@ class ProjectsWidget extends StatelessWidget {
             builder: (_, viewModel, __) {
               return LayoutBuilder(builder: (context, constraints) {
                 final bool isDesktop = constraints.maxWidth > 769;
-                return ListView.builder(
+                return Column(
+                  children: [
+                    ListView.builder(
                     shrinkWrap: true,
                     primary: false,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: viewModel.projectData.length,
                     itemBuilder: (context, index) {
+                      if(context.read<PortfolioViewModel>().isProjectViewLimited && index >= 3){
+                        return null;
+                      }
                       return (isDesktop)
                           ? Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 100, vertical: 40),
-                              padding: const EdgeInsets.all(30),
-                              child: getContainerDesktop(index, context))
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 40),
+                          padding: const EdgeInsets.all(30),
+                          child: getContainerDesktop(index, context))
                           : Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 40),
-                              padding: const EdgeInsets.all(30),
-                              child: getContainerMobile(
-                                  index, context, constraints));
-                    });
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 40),
+                          padding: const EdgeInsets.all(30),
+                          child: getContainerMobile(
+                              index, context, constraints));
+                    }),
+                    (context.read<PortfolioViewModel>().isProjectViewLimited) ? ElevatedButton(onPressed: (){
+                      context.read<PortfolioViewModel>().setIsProjectViewLimited = !context.read<PortfolioViewModel>().isProjectViewLimited;
+                    }, child: const Text("See More")) : const SizedBox.shrink(),
+                  ],
+                );
               });
             },
           ),
