@@ -55,13 +55,6 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
           controller: widget.scrollController,
           child: Column(
             children: [
-              NavbarWidget(
-                scrollToSection: widget.scrollToSection,
-                skillSectionKey: widget.skillSectionKey,
-                aboutSectionKey: widget.aboutSectionKey,
-                projectSectionKey: widget.projectSectionKey,
-                contactMeSectionKey: widget.contactMeSectionKey,
-              ),
               const IntroWidget(),
               const SocialCardsWidget(),
               (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(30) : const Gap(60),
@@ -74,7 +67,14 @@ class _HomeLayoutDesktopState extends State<HomeLayoutDesktop>
               const FooterWidget()
             ],
           ),
-        )
+        ),
+        NavbarWidget(
+          scrollToSection: widget.scrollToSection,
+          skillSectionKey: widget.skillSectionKey,
+          aboutSectionKey: widget.aboutSectionKey,
+          projectSectionKey: widget.projectSectionKey,
+          contactMeSectionKey: widget.contactMeSectionKey,
+        ),
       ],
     );
   }

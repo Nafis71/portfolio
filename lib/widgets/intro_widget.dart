@@ -12,7 +12,7 @@ class IntroWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(70) : const Gap(30),
+        (ResponsiveBreakpoints.of(context).isDesktop) ? const Gap(70) : const Gap(50),
         (!ResponsiveBreakpoints.of(context).isDesktop) ? const Center(child: ProfilePictureWidget(),) : const SizedBox.shrink(),
         Row(
           children: [
