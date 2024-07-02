@@ -73,12 +73,24 @@ class PortfolioViewModel extends ChangeNotifier {
           Assets.restApiIcon,
         ]),
     ProjectData(
+        projectName: "Doctor Babu",
+        projectDescription:
+        "Doctor Babu allows medical professionals and patients to schedule appointments and communicate one-on-one via online video calls with a robust UI. Users can also purchase prescriptions online by selecting a specific pharmaceutical from a large database of medications, uploading a prescription, or using doctorBabu's saved prescription. Obtain e-prescriptions and set medication alerts. This telemedicine software uses AI to help users identify a disease based on the symptoms they describe.",
+        projectLink: "https://github.com/Nafis71/DoctorBabu",
+        projectPicture: Assets.doctorBabuPicture,
+        projectTechStacks: [
+          Assets.androidIcon,
+          Assets.javaIcon,
+          Assets.firebaseIcon,
+        ]),
+    ProjectData(
         projectName: "BMI Calculator",
         projectDescription:
             "The BMI calculator is an app that can calculate an individual's BMI based on their height and weight, for both adults and nonadults. Additionally, its UI is attractive, and it is so user-friendly that individuals of all ages can easily use it.",
         projectLink: "https://github.com/Nafis71/bmi_calculator",
         projectPicture: Assets.bmiCalculatorPicture,
         projectTechStacks: [Assets.flutterIcon, Assets.dartIcon]),
+
   ];
 
   bool get isProjectViewLimited => _isProjectViewLimited;
