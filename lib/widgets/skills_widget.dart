@@ -73,7 +73,7 @@ class SkillsWidget extends StatelessWidget {
   Widget mobileScrollingAnimation(BuildContext context){
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.4,
-      child: Lottie.asset("assets/lotties/mobile.json",fit: BoxFit.contain,renderCache: RenderCache.raster),
+      child: Lottie.asset("assets/lotties/mobile.json",fit: BoxFit.contain,renderCache: RenderCache.drawingCommands),
     );
   }
 }

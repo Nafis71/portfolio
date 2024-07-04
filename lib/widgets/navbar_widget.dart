@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:portfolio/utils/app_strings.dart';
 import 'package:portfolio/viewModels/portfolio_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -11,8 +12,14 @@ class NavbarWidget extends StatelessWidget {
   final GlobalKey projectSectionKey;
   final GlobalKey contactMeSectionKey;
 
-  const NavbarWidget(
-      {super.key, required this.scrollToSection, required this.skillSectionKey, required this.aboutSectionKey, required this.projectSectionKey, required this.contactMeSectionKey,});
+  const NavbarWidget({
+    super.key,
+    required this.scrollToSection,
+    required this.skillSectionKey,
+    required this.aboutSectionKey,
+    required this.projectSectionKey,
+    required this.contactMeSectionKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,39 +30,46 @@ class NavbarWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Portfolio",
-            style: Theme
-                .of(context)
-                .textTheme
-                .titleLarge,
+            AppStrings.navBarTitle,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          (ResponsiveBreakpoints.of(context).isDesktop) ? desktopRow() : const SizedBox.shrink(),
-          (ResponsiveBreakpoints.of(context).isDesktop) ? ElevatedButton.icon(
-            onPressed: () {
-              context.read<PortfolioViewModel>().downloadResume();
-            },
-            label: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text("Resume"),
-                Gap(5),
-                Icon(Icons.download_outlined)
-              ],
-            ),
-          ) : InkWell(
-              onTap: (){
-                Scaffold.of(context).openEndDrawer();
-              },
-              child: const Icon(Icons.menu,size: 27,)),
+          (ResponsiveBreakpoints.of(context).isDesktop)
+              ? desktopRow()
+              : const SizedBox.shrink(),
+          (ResponsiveBreakpoints.of(context).isDesktop)
+              ? ElevatedButton.icon(
+                  onPressed: () {
+                    context.read<PortfolioViewModel>().downloadResume();
+                  },
+                  label: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Resume"),
+                      Gap(5),
+                      Icon(Icons.download_outlined)
+                    ],
+                  ),
+                )
+              : InkWell(
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  child: const Icon(
+                    Icons.menu,
+                    size: 27,
+                  )),
         ],
       ),
     );
   }
-  Widget desktopRow(){
+
+  Widget desktopRow() {
     return Row(
       children: [
         TextButton(
-          onPressed: () {scrollToSection(aboutSectionKey);},
+          onPressed: () {
+            scrollToSection(aboutSectionKey);
+          },
           child: const Text(
             "About Me",
           ),
@@ -69,14 +83,18 @@ class NavbarWidget extends StatelessWidget {
         ),
         const Gap(30),
         TextButton(
-          onPressed: () {scrollToSection(projectSectionKey);},
+          onPressed: () {
+            scrollToSection(projectSectionKey);
+          },
           child: const Text(
             "Projects",
           ),
         ),
         const Gap(30),
         TextButton(
-          onPressed: () {scrollToSection(contactMeSectionKey);},
+          onPressed: () {
+            scrollToSection(contactMeSectionKey);
+          },
           child: const Text(
             "Contact Me",
           ),

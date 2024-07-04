@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:portfolio/viewModels/portfolio_view_model.dart';
+import 'package:portfolio/wrappers/svg_image_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
@@ -174,7 +174,7 @@ class ProjectsWidget extends StatelessWidget {
                     height: 20,
                     margin:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    child: SvgPicture.asset(element),
+                    child: SvgImageLoader(assetName: element, fit: BoxFit.contain,),
                   ),
                 )
                 .toList()),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:portfolio/utils/app_strings.dart';
 import 'package:portfolio/utils/web_color.dart';
 
 class FooterWidget extends StatelessWidget {
@@ -29,7 +30,7 @@ class FooterWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "@2024 Portfolio",
+                  AppStrings.portfolioDate,
                   style: Theme
                       .of(context)
                       .textTheme

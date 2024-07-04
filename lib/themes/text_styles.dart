@@ -17,12 +17,12 @@ class WebTextStyles {
           fontSize: 14, fontFamily: "Poppins", color: Colors.grey) ,
       headlineMedium: const TextStyle(
           color: WebColor.webPrimaryColor,
-          fontSize: 38,
+          fontSize: 35,
           fontFamily: "Poppins",
           letterSpacing: 1,
           fontWeight: FontWeight.bold),
       headlineLarge: const TextStyle(
-        fontSize: 38,
+        fontSize: 35,
         fontFamily: "Poppins Bold",
         letterSpacing: 1,
         fontWeight: FontWeight.normal,

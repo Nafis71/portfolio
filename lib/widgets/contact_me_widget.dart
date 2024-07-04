@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:portfolio/utils/app_strings.dart';
 import 'package:portfolio/widgets/social_cards_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -98,26 +99,26 @@ class ContactMeWidget extends StatelessWidget {
       children: [
         TextFormField(
           decoration: const InputDecoration(
-            hintText: "Enter Name",
+            hintText: AppStrings.nameFieldHintText,
           ),
         ),
         const Gap(15),
         TextFormField(
           decoration: const InputDecoration(
-            hintText: "Email",
+            hintText: AppStrings.emailFieldHintText,
           ),
         ),
         const Gap(15),
         TextFormField(
           decoration: const InputDecoration(
-            hintText: "Your Website (if exists)",
+            hintText: AppStrings.websiteFieldHintText,
           ),
         ),
         const Gap(15),
         TextFormField(
           maxLines: 4,
           decoration: const InputDecoration(
-            hintText: "How can I help?",
+            hintText: AppStrings.messageFieldHintText,
           ),
         ),
         const Gap(15),
@@ -128,9 +129,14 @@ class ContactMeWidget extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Text(
-                    "Get In Touch",
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  child: const Wrap(
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Text(
+                        AppStrings.contactMeButtonText,
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
               ),
