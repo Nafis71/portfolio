@@ -10,25 +10,25 @@ import '../models/social_data.dart';
 class PortfolioViewModel extends ChangeNotifier {
   bool _isProjectViewLimited = true;
   List<SocialData> socialData = [
-    SocialData(
-        socialLink: "https://facebook.com/nafishasantonmoy",
-        iconPath: Assets.facebookIcon,
-        color: Colors.white),
-    SocialData(
-        socialLink: "https://linkedin.com/in/nafishasantonmoy",
-        iconPath: Assets.linkedInIcon,
-        color: Colors.white),
-    SocialData(
-        socialLink: "https://github.com/Nafis71",
-        iconPath: Assets.githubIcon,
-        color: Colors.white),
-    SocialData(
-        socialLink: "https://x.com/Nafis_71",
-        iconPath: Assets.twitterIcon,
-        color: Colors.white),
-  ];
-  List<SkillData> skillData = [
-    SkillData(skillName: "Flutter", skillIcons: Assets.flutterIcon),
+      SocialData(
+          socialLink: "https://facebook.com/nafishasantonmoy",
+          iconPath: Assets.facebookIcon,
+          color: Colors.white),
+      SocialData(
+          socialLink: "https://linkedin.com/in/nafishasantonmoy",
+          iconPath: Assets.linkedInIcon,
+          color: Colors.white),
+      SocialData(
+          socialLink: "https://github.com/Nafis71",
+          iconPath: Assets.githubIcon,
+          color: Colors.white),
+      SocialData(
+          socialLink: "https://x.com/Nafis_71",
+          iconPath: Assets.twitterIcon,
+          color: Colors.white),
+    ];
+        List<SkillData> skillData = [
+        SkillData(skillName: "Flutter", skillIcons: Assets.flutterIcon),
     SkillData(skillName: "Dart", skillIcons: Assets.dartIcon),
     SkillData(skillName: "Java", skillIcons: Assets.javaIcon),
     SkillData(skillName: "Firebase", skillIcons: Assets.firebaseIcon),
@@ -39,6 +39,17 @@ class PortfolioViewModel extends ChangeNotifier {
   ];
 
   List<ProjectData> projectData = [
+    ProjectData(
+        projectName: "Crafty Bay",
+        projectDescription:
+        "Crafty Bay is a feature-rich e-commerce app designed to provide a seamless shopping experience for users who love unique and handcrafted products. With an intuitive user interface, Crafty Bay allows shoppers to browse a wide range of categories.",
+        projectLink: "https://github.com/Nafis71/crafty_bay",
+        projectPicture: Assets.craftyBay,
+        projectTechStacks: [
+          Assets.flutterIcon,
+          Assets.dartIcon,
+          Assets.restApiIcon,
+        ]),
     ProjectData(
         projectName: "Task Manager",
         projectDescription:

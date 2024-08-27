@@ -8,6 +8,7 @@ class Assets{
   static const String glideWebPicture = "$imagePath/glideweb.png";
   static const String bmiCalculatorPicture = "$imagePath/bmiCalculator.png";
   static const String doctorBabuPicture = "$imagePath/doctorBabu.png";
+  static const String craftyBay = "$imagePath/craftyBay.png";
   static const String background = "$imagePath/background.svg";
   static const String facebookIcon = "$iconPath/facebook.svg";
   static const String linkedInIcon = "$iconPath/linkedin.svg";
