@@ -40,7 +40,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
         {/* iPhone Carousel */}
         <div className="relative flex items-center justify-center w-full min-h-[450px] md:min-h-[650px]">
           <AnimatePresence mode="popLayout">
-            {/* Left Phone */}
+            {/* Left Phone - Static */}
             <motion.div
               key={`left-${leftIdx}`}
               initial={{ x: -100, opacity: 0, scale: 0.6 }}
@@ -49,10 +49,10 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-[180px] md:w-[250px] aspect-[9/19.5] blur-[1px]"
             >
-              <IPhoneFrame images={projects[leftIdx].images} />
+              <IPhoneFrame images={projects[leftIdx].images} autoSlide={false} />
             </motion.div>
 
-            {/* Center Phone */}
+            {/* Center Phone - Auto Sliding */}
             <motion.div
               key={`center-${centerIdx}`}
               initial={{ scale: 0.8, opacity: 0 }}
@@ -61,10 +61,10 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="relative w-[220px] md:w-[320px] aspect-[9/19.5] shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
             >
-              <IPhoneFrame images={projects[centerIdx].images} isMain />
+              <IPhoneFrame images={projects[centerIdx].images} autoSlide={true} isMain />
             </motion.div>
 
-            {/* Right Phone */}
+            {/* Right Phone - Static */}
             <motion.div
               key={`right-${rightIdx}`}
               initial={{ x: 100, opacity: 0, scale: 0.6 }}
@@ -73,7 +73,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-[180px] md:w-[250px] aspect-[9/19.5] blur-[1px]"
             >
-              <IPhoneFrame images={projects[rightIdx].images} />
+              <IPhoneFrame images={projects[rightIdx].images} autoSlide={false} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -118,16 +118,19 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
   );
 };
 
-const IPhoneFrame = ({ images, isMain }: { images: string[]; isMain?: boolean }) => {
+const IPhoneFrame = ({ images, isMain, autoSlide = false }: { images: string[]; isMain?: boolean; autoSlide?: boolean }) => {
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (!autoSlide || images.length <= 1) {
+      setCurrentImgIdx(0);
+      return;
+    }
     const interval = setInterval(() => {
       setCurrentImgIdx((prev) => (prev + 1) % images.length);
-    }, 3000 + Math.random() * 1000); // Slight offset for more natural feel
+    }, 3000);
     return () => clearInterval(interval);
-  }, [images]);
+  }, [images.length, autoSlide]);
 
   return (
     <div className={`relative w-full h-full bg-black rounded-[2.5rem] md:rounded-[3rem] border-[6px] md:border-[10px] border-[#1f1f1f] overflow-hidden shadow-2xl`}>
@@ -140,7 +143,7 @@ const IPhoneFrame = ({ images, isMain }: { images: string[]; isMain?: boolean })
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
             className="w-full h-full object-cover" 
           />
         </AnimatePresence>

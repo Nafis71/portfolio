@@ -244,11 +244,13 @@ const Contact = () => {
 
 export default function Home() {
   const works = [
-    { title: "Flutter Developer", bg: "blue" },
-    { title: "Mobile Specialist", bg: "purple" },
-    { title: "Clean Coder", bg: "green" },
-    { title: "Problem Solver", bg: "yellow" },
-    { title: "Mid-Level Dev", bg: "red" },
+    { title: "Software Engineer", bg: "blue" },
+    { title: "Problem Solver", bg: "purple" },
+    { title: "Fitness Enthusiast", bg: "green" },
+    { title: "Disciplined", bg: "yellow" },
+    { title: "Perfectionist", bg: "red" },
+    { title: "Detail Oriented", bg: "pink" },
+    { title: "Curious Learner", bg: "amber" },
   ];
 
   return (

@@ -31,5 +31,16 @@
       "/mobilepictures/trackatail/3.png",
       "/mobilepictures/trackatail/4.png"
     ]
+  },
+  {
+    "title": "CamScanify",
+    "tech": "Flutter, Dart, Rest Api, Sqflite, GetX",
+    "desc": "A PDF management app for scanning, creating, and organizing PDFs with secure offline access and cloud sync. Improved file access speed by 40%.",
+    "images": [
+      "/mobilepictures/camscanify/1.png",
+      "/mobilepictures/camscanify/2.png",
+      "/mobilepictures/camscanify/3.png",
+      "/mobilepictures/camscanify/4.png"
+    ]
   }
 ]
