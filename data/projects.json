@@ -1,0 +1,35 @@
+[
+  {
+    "title": "GINZA XIAOMA",
+    "tech": "Flutter, Dart, Rest Api, Firebase, GetX",
+    "desc": "A luxury resale app for Hermès products, enabling users to buy, sell, and consign premium items across Japan and Hong Kong. Successfully published on App Store & Play Store.",
+    "images": [
+      "/mobilepictures/ginxaxioma/1.png",
+      "/mobilepictures/ginxaxioma/2.png",
+      "/mobilepictures/ginxaxioma/3.png",
+      "/mobilepictures/ginxaxioma/4.png"
+    ]
+  },
+  {
+    "title": "TailorHive",
+    "tech": "Flutter, Dart, Firebase, GetX",
+    "desc": "A tailor discovery app connecting users with verified local tailors via location-based search, style catalogs, and real-time chat. Integrated Google Maps API for better conversions.",
+    "images": [
+      "/mobilepictures/tailorhive/1.png",
+      "/mobilepictures/tailorhive/2.png",
+      "/mobilepictures/tailorhive/3.png",
+      "/mobilepictures/tailorhive/4.png"
+    ]
+  },
+  {
+    "title": "TrackaTail",
+    "tech": "Flutter, Dart, Firebase, Rest Api, GetX",
+    "desc": "An all-in-one pet care app that helps owners track health data, set reminders, and connect with local services. Optimized for 35% better engagement.",
+    "images": [
+      "/mobilepictures/trackatail/1.png",
+      "/mobilepictures/trackatail/2.png",
+      "/mobilepictures/trackatail/3.png",
+      "/mobilepictures/trackatail/4.png"
+    ]
+  }
+]

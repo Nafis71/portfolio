@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -49,7 +49,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-[180px] md:w-[250px] aspect-[9/19.5] blur-[1px]"
             >
-              <IPhoneFrame src={projects[leftIdx].images[0]} />
+              <IPhoneFrame images={projects[leftIdx].images} />
             </motion.div>
 
             {/* Center Phone */}
@@ -61,7 +61,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="relative w-[220px] md:w-[320px] aspect-[9/19.5] shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
             >
-              <IPhoneFrame src={projects[centerIdx].images[0]} isMain />
+              <IPhoneFrame images={projects[centerIdx].images} isMain />
             </motion.div>
 
             {/* Right Phone */}
@@ -73,7 +73,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-[180px] md:w-[250px] aspect-[9/19.5] blur-[1px]"
             >
-              <IPhoneFrame src={projects[rightIdx].images[0]} />
+              <IPhoneFrame images={projects[rightIdx].images} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -118,22 +118,41 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
   );
 };
 
-const IPhoneFrame = ({ src, isMain }: { src: string; isMain?: boolean }) => (
-  <div className={`relative w-full h-full bg-black rounded-[2.5rem] md:rounded-[3rem] border-[6px] md:border-[10px] border-[#1f1f1f] overflow-hidden shadow-2xl`}>
-    <div className="absolute inset-0 w-full h-full">
-      <img 
-        src={src} 
-        alt="App Screen" 
-        className="w-full h-full object-cover" 
-      />
-    </div>
-    
-    {/* Island */}
-    <div className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 w-16 md:w-24 h-5 md:h-7 bg-black rounded-full z-20 flex items-center justify-center" />
+const IPhoneFrame = ({ images, isMain }: { images: string[]; isMain?: boolean }) => {
+  const [currentImgIdx, setCurrentImgIdx] = useState(0);
 
-    {/* Reflections */}
-    <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-white/5 z-30" />
-  </div>
-);
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImgIdx((prev) => (prev + 1) % images.length);
+    }, 3000 + Math.random() * 1000); // Slight offset for more natural feel
+    return () => clearInterval(interval);
+  }, [images]);
+
+  return (
+    <div className={`relative w-full h-full bg-black rounded-[2.5rem] md:rounded-[3rem] border-[6px] md:border-[10px] border-[#1f1f1f] overflow-hidden shadow-2xl`}>
+      <div className="absolute inset-0 w-full h-full">
+        <AnimatePresence mode="wait">
+          <motion.img 
+            key={currentImgIdx}
+            src={images[currentImgIdx]} 
+            alt="App Screen" 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="w-full h-full object-cover" 
+          />
+        </AnimatePresence>
+      </div>
+      
+      {/* Island */}
+      <div className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 w-16 md:w-24 h-5 md:h-7 bg-black rounded-full z-20" />
+
+      {/* Reflections */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-white/5 z-30" />
+    </div>
+  );
+};
 
 export default ProjectShowcase;
