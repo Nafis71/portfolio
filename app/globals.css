@@ -1,73 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0E17;
-  --foreground: #FFFFFF;
-  --accent: #2091f2;
-  --secondary-bg: #141C2B;
-  --text-gray: #A0AEC0;
+    --background: #0a0e17;
+    --foreground: #ffffff;
+    --accent: #2091f2;
+    --secondary-bg: #141c2b;
+    --text-gray: #a0aec0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-secondary-bg: var(--secondary-bg);
-  --color-text-gray: var(--text-gray);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-accent: var(--accent);
+    --color-secondary-bg: var(--secondary-bg);
+    --color-text-gray: var(--text-gray);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
-  overflow-x: hidden;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 /* Custom Utilities */
 @layer base {
-  .hero-glow {
-    background: radial-gradient(circle, rgba(32, 145, 242, 0.15) 0%, rgba(10, 14, 23, 0) 70%);
-  }
+    .hero-glow {
+        background: radial-gradient(
+            circle,
+            rgba(32, 145, 242, 0.15) 0%,
+            rgba(10, 14, 23, 0) 70%
+        );
+    }
 }
 
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 1.5rem)); }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 1.5rem));
+    }
 }
 
 .animate-scroll {
-  animation: scroll 40s linear infinite;
-  display: flex;
-  width: max-content;
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: max-content;
 }
 
 @keyframes rotate-up {
-  0% { transform: translateY(100%); opacity: 0; }
-  10% { transform: translateY(0); opacity: 1; }
-  90% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-100%); opacity: 0; }
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    10% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
 }
 
 .animate-rotate-up {
-  animation: rotate-up 3s infinite ease-in-out;
+    animation: rotate-up 3s infinite ease-in-out;
 }
 
 @keyframes rotate-full {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .animate-rotate-full {
-  animation: rotate-full 20s linear infinite;
+    animation: rotate-full 20s linear infinite;
 }
 
 @keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .animate-bounce-slow {
-  animation: bounce-slow 4s infinite ease-in-out;
+    animation: bounce-slow 4s infinite ease-in-out;
 }

@@ -1,12 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import {
-  Code2,
-  Smartphone,
-  Globe,
   Menu,
   X,
-  ArrowRight,
   Mail,
   Phone,
   Linkedin,
@@ -99,7 +95,7 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="mailto:nhtonmoy2@gmail.com"
+                href="#contact"
                 className="w-full py-4 rounded bg-accent text-white text-center"
               >
                 Hire Me
