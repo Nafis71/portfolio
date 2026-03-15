@@ -156,25 +156,46 @@ const About = () => (
     id="about"
     className="px-6 py-24 max-w-4xl mx-auto border-b border-white/5"
   >
-    <div className="flex flex-col items-center text-center space-y-12">
-      <div className="space-y-6">
+    <div className="flex flex-col items-start text-left space-y-12">
+      <div className="space-y-6 w-full">
         <h2 className="text-4xl md:text-5xl font-bold text-white">About me</h2>
-        <div className="w-20 h-1.5 bg-accent rounded-full mx-auto" />
-        <div className="text-text-gray text-base md:text-lg leading-relaxed max-w-3xl mx-auto space-y-6">
+        <div className="w-20 h-1.5 bg-accent rounded-full" />
+        <div className="text-text-gray text-base md:text-lg leading-relaxed max-w-4xl space-y-6">
           <p>
-            A <span className="text-white font-semibold">Mid-Level Flutter Developer</span> passionate about building high-performance, scalable, and beautifully designed mobile applications.
+            A{" "}
+            <span className="text-white font-semibold">
+              Mid-Level Flutter Developer
+            </span>{" "}
+            passionate about building high-performance, scalable, and
+            beautifully designed mobile applications.
           </p>
           <p>
-            With over 2 years of professional experience, I specialize in developing robust cross-platform apps using Flutter and Dart, with a strong focus on maintainable architecture, performance optimization, and smooth user experiences. I enjoy transforming complex product ideas into pixel-perfect interfaces and reliable production systems.
+            With over 2 years of professional experience, I specialize in
+            developing robust cross-platform apps using Flutter and Dart, with a
+            strong focus on maintainable architecture, performance optimization,
+            and smooth user experiences. I enjoy transforming complex product
+            ideas into pixel-perfect interfaces and reliable production systems.
           </p>
           <p>
-            In my work, I focus on writing clean and scalable code using Layered Architecture, Repository Patterns, and modern state management solutions like GetX and Provider. I also have experience integrating REST APIs, Firebase services, real-time systems, and background processing to build apps that perform efficiently even under heavy workloads.
+            In my work, I focus on writing clean and scalable code using Layered
+            Architecture, Repository Patterns, and modern state management
+            solutions like GetX and Provider. I also have experience integrating
+            REST APIs, Firebase services, real-time systems, and background
+            processing to build apps that perform efficiently even under heavy
+            workloads.
           </p>
           <p>
-            Throughout my career, I have contributed to multiple production apps including marketplaces, AI-powered platforms, productivity tools, and pet care ecosystems, managing everything from feature development and architecture design to Play Store and App Store releases.
+            Throughout my career, I have contributed to multiple production apps
+            including marketplaces, AI-powered platforms, productivity tools,
+            and pet care ecosystems, managing everything from feature
+            development and architecture design to Play Store and App Store
+            releases.
           </p>
           <p>
-            Beyond coding, I enjoy continuously improving my craft, learning new technologies, and building products that solve real problems. My goal is to grow into a senior mobile engineer who builds scalable products used by millions of people.
+            Beyond coding, I enjoy continuously improving my craft, learning new
+            technologies, and building products that solve real problems. My
+            goal is to grow into a senior mobile engineer who builds scalable
+            products used by millions of people.
           </p>
         </div>
       </div>
@@ -183,30 +204,46 @@ const About = () => (
         <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl -z-10" />
 
         <div className="relative">
-          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">2+</div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">
+            2+
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Years<br />Experience
+            Years
+            <br />
+            Experience
           </div>
         </div>
 
         <div className="relative">
-          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">5+</div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">
+            5+
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Production<br />Apps
+            Production
+            <br />
+            Apps
           </div>
         </div>
 
         <div className="relative">
-          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">40%</div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">
+            40%
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Performance<br />Improvement
+            Performance
+            <br />
+            Improvement
           </div>
         </div>
 
         <div className="relative">
-          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">99.9%</div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">
+            99.9%
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Crash-Free<br />Stability
+            Crash-Free
+            <br />
+            Stability
           </div>
         </div>
       </div>
