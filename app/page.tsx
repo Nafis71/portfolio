@@ -1,64 +1,121 @@
-// import React from "react";
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
 import {
   Code2,
   Smartphone,
   Globe,
   Menu,
+  X,
+  ArrowRight,
   Mail,
   Phone,
   Linkedin,
   Github as GithubIcon,
+  Briefcase,
+  GraduationCap,
+  Calendar,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Hero from "./hero";
 import ProjectShowcase from "./ProjectShowcase";
 import projectsData from "../data/projects.json";
+import ChatWidget from "./chat-widget";
 
-const Navbar = () => (
-  <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
-    <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
-      <a
-        href="#"
-        className="text-2xl font-black italic tracking-tighter text-white"
-      >
-        <span className="bg-accent px-2 py-0.5 rounded">Tonmoy.</span>
-      </a>
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-      <div className="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-gray">
-        <a href="#" className="hover:text-accent transition-colors">
-          Home
-        </a>
-        <a href="#about" className="hover:text-accent transition-colors">
-          About
-        </a>
-        <a href="#projects" className="hover:text-accent transition-colors">
-          Projects
-        </a>
-        <a href="#contact" className="hover:text-accent transition-colors">
-          Contact
-        </a>
-      </div>
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setIsOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-      <div className="flex items-center gap-4">
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
+      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
         <a
-          href="mailto:nhtonmoy2@gmail.com"
-          className="hidden sm:block px-4 py-2 rounded border border-accent/30 text-[10px] font-black uppercase tracking-widest text-accent hover:bg-accent hover:text-white transition-all"
+          href="#"
+          className="text-2xl font-black italic tracking-tighter text-white"
         >
-          Hire Me
+          <span className="bg-accent px-2 py-0.5 rounded">Tonmoy.</span>
         </a>
-        <div className="md:hidden p-2">
-          <Menu className="w-5 h-5 text-text-gray" />
+
+        <div className="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-gray">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="hover:text-accent transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
-      </div>
-    </nav>
-  </header>
-);
+
+        <div className="flex items-center gap-4">
+          <a
+            href="#contact"
+            className="hidden sm:block px-4 py-2 rounded border border-accent/30 text-[10px] font-black uppercase tracking-widest text-accent hover:bg-accent hover:text-white transition-all"
+          >
+            Hire Me
+          </a>
+          <button
+            className="md:hidden p-2 text-text-gray hover:text-white transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-secondary-bg border-b border-white/5 overflow-hidden"
+          >
+            <div className="flex flex-col p-6 gap-6 text-sm font-bold uppercase tracking-widest">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-text-gray hover:text-accent transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a
+                href="mailto:nhtonmoy2@gmail.com"
+                className="w-full py-4 rounded bg-accent text-white text-center"
+              >
+                Hire Me
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+};
 
 const TechStack = () => (
   <section className="border-y border-foreground/5 bg-secondary-bg/30 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6 py-10">
-      <div className="flex flex-wrap justify-center md:justify-between gap-8 text-text-gray font-medium uppercase tracking-widest text-sm">
+      <div className="flex flex-wrap justify-center gap-x-8 gap-y-6 text-text-gray font-medium uppercase tracking-widest text-[10px] md:text-sm">
         <span>Flutter</span>
         <span>Dart</span>
         <span>Firebase</span>
@@ -75,104 +132,154 @@ const TechStack = () => (
 const About = () => (
   <section
     id="about"
-    className="px-6 py-24 max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-start border-b border-white/5"
+    className="px-6 py-24 max-w-4xl mx-auto border-b border-white/5"
   >
-    <div className="space-y-12">
-      <div className="flex gap-6 items-start">
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <div className="p-3 bg-secondary-bg rounded-lg">
-            <Smartphone className="w-6 h-6 text-accent" />
-          </div>
-          <div className="w-[1px] h-12 bg-accent/30" />
-          <div className="w-2 h-2 rounded-full bg-accent" />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold mb-1">
-            Cross-Platform App Development
-          </h3>
-          <p className="text-text-gray text-sm">
-            Reliable Android & iOS apps using Flutter.
-          </p>
-        </div>
-      </div>
-
-      <div className="flex gap-6 items-start">
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <div className="p-3 bg-secondary-bg rounded-lg">
-            <Globe className="w-6 h-6 text-accent" />
-          </div>
-          <div className="w-[1px] h-12 bg-accent/30" />
-          <div className="w-2 h-2 rounded-full bg-accent" />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold mb-1">Backend Integration</h3>
-          <p className="text-text-gray text-sm">
-            REST APIs, Firebase, and Cloud Sync.
-          </p>
-        </div>
-      </div>
-
-      <div className="flex gap-6 items-start">
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <div className="p-3 bg-secondary-bg rounded-lg">
-            <Code2 className="w-6 h-6 text-accent" />
-          </div>
-        </div>
-        <div>
-          <h3 className="text-xl font-bold mb-1">Clean Code & Architecture</h3>
-          <p className="text-text-gray text-sm">
-            State management with GetX and Provider.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-4xl font-bold mb-6">About me</h2>
-        <p className="text-text-gray leading-relaxed max-w-lg">
-          I am a Flutter Developer with 2+ years of experience building reliable
+    <div className="flex flex-col items-center text-center space-y-12">
+      <div className="space-y-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-white">About me</h2>
+        <div className="w-20 h-1.5 bg-accent rounded-full mx-auto" />
+        <p className="text-text-gray text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+          I am a <span className="text-white font-semibold">Flutter Developer</span> with 2+ years of experience building reliable
           cross-platform apps. I specialize in Flutter, Dart, REST APIs, and
           Firebase, with proven experience managing Play Store and App Store
           releases for stable, crash-free apps. Currently serving as a Mid-Level
-          Flutter Developer at SaraTech Ltd.
+          Flutter Developer at <span className="text-accent font-semibold underline decoration-accent/30 underline-offset-4">SaraTech Ltd</span>.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-8 pt-8 border-t border-foreground/5">
-        <div>
-          <div className="text-3xl font-bold mb-1 text-accent">2+</div>
-          <div className="text-xs text-text-gray uppercase tracking-wider">
+      <div className="grid grid-cols-2 gap-12 md:gap-24 p-8 md:p-12 rounded-[2.5rem] bg-secondary-bg/30 border border-white/5 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl -z-10" />
+        <div className="relative">
+          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">2+</div>
+          <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
             Years of
             <br />
             experience
           </div>
         </div>
-        <div>
-          <div className="text-3xl font-bold mb-1 text-accent">100%</div>
-          <div className="text-xs text-text-gray uppercase tracking-wider">
+        <div className="relative">
+          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">100%</div>
+          <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
             Crash-free
             <br />
             stability
           </div>
         </div>
       </div>
-
-      <div className="pt-8 border-t border-foreground/5">
-        <h4 className="font-bold mb-4 uppercase tracking-widest text-xs text-text-gray">
-          Education
-        </h4>
-        <div className="text-sm">
-          <p className="font-bold">BSc in Computer Science & Engineering</p>
-          <p className="text-text-gray">
-            Bangladesh University of Business and Technology
-          </p>
-          <p className="text-xs text-text-gray/60 mt-1">2020 – 2024</p>
-        </div>
-      </div>
     </div>
   </section>
 );
+
+const Timeline = () => {
+  const experiences = [
+    {
+      company: "SaraTech Ltd.",
+      role: "Flutter Developer (Mid-Level)",
+      period: "Oct 2025 – Present",
+      description:
+        "Led development of cross-platform Flutter apps for Android and iOS, implementing advanced features and integrating REST APIs, Firebase, and third-party services. Optimized performance for 100% crash-free stability and maintained scalable codebases.",
+    },
+    {
+      company: "SaraTech Ltd.",
+      role: "Junior Flutter Developer",
+      period: "Mar 2024 – Oct 2025",
+      description:
+        "Assisted in developing cross-platform apps, implementing core features and integrating REST APIs. Converted Figma designs into pixel-perfect UI and collaborated with the team to deliver features on schedule.",
+    },
+  ];
+
+  const education = [
+    {
+      institution: "Bangladesh University of Business and Technology",
+      degree: "BSc in Computer Science & Engineering",
+      period: "Jan 2020 – Mar 2024",
+      location: "Dhaka, Bangladesh",
+    },
+    {
+      institution: "Ostad",
+      degree: "App Development with Flutter",
+      period: "Mar 2023 – Sep 2023",
+      location: "Coursework",
+    },
+  ];
+
+  return (
+    <section id="experience" className="px-6 py-24 max-w-5xl mx-auto space-y-24 border-b border-white/5">
+      {/* Education Section */}
+      <div className="space-y-12">
+        <div className="flex flex-col items-center text-center space-y-4">
+          <h2 className="text-4xl font-bold text-white">Education</h2>
+          <div className="w-20 h-1.5 bg-accent rounded-full" />
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {education.map((item, idx) => (
+            <div
+              key={idx}
+              className="relative p-8 rounded-3xl bg-secondary-bg/50 border border-white/5 hover:border-accent/30 transition-all group overflow-hidden"
+            >
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-all" />
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-accent/10 rounded-2xl text-accent group-hover:bg-accent group-hover:text-white transition-all">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-accent font-bold text-[10px] uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                    <Calendar className="w-3.5 h-3.5" /> {item.period}
+                  </p>
+                  <h3 className="text-xl font-bold mb-2 text-white leading-tight">{item.degree}</h3>
+                  <p className="text-text-gray font-medium mb-1">
+                    {item.institution}
+                  </p>
+                  <p className="text-text-gray/50 text-xs">{item.location}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Experience Section */}
+      <div className="space-y-12">
+        <div className="flex flex-col items-center text-center space-y-4">
+          <h2 className="text-4xl font-bold text-white">Professional Experience</h2>
+          <div className="w-20 h-1.5 bg-accent rounded-full" />
+        </div>
+
+        <div className="relative space-y-10 before:absolute before:inset-0 before:left-[19px] md:before:left-[23px] before:h-full before:w-0.5 before:bg-gradient-to-b before:from-accent/50 before:via-accent/20 before:to-transparent">
+          {experiences.map((exp, idx) => (
+            <div key={idx} className="relative pl-12 md:pl-16 group">
+              {/* Timeline Dot */}
+              <div className="absolute left-0 top-0 flex items-center justify-center w-10 md:w-12 h-10 md:h-12 rounded-full border border-accent/30 bg-background text-accent shadow-[0_0_20px_rgba(32,145,242,0.2)] z-10 group-hover:scale-110 transition-transform">
+                <Briefcase className="w-4 md:w-5 h-4 md:h-5" />
+              </div>
+
+              <div className="p-8 rounded-3xl bg-secondary-bg/50 border border-white/5 hover:border-accent/20 transition-all">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-accent transition-colors">
+                      {exp.role}
+                    </h3>
+                    <div className="text-accent font-semibold text-lg flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      {exp.company}
+                    </div>
+                  </div>
+                  <time className="px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent font-bold text-xs uppercase tracking-widest whitespace-nowrap self-start md:self-center">
+                    {exp.period}
+                  </time>
+                </div>
+                <p className="text-text-gray text-base leading-relaxed max-w-3xl">
+                  {exp.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Contact = () => {
   const contacts = [
@@ -197,30 +304,29 @@ const Contact = () => {
     {
       icon: GithubIcon,
       label: "Github",
-      value: "Nafis Hasan Tonmoy",
-      href: "https://github.com/nafis71",
+      value: "Nafis71",
+      href: "https://github.com/Nafis71",
     },
   ];
 
   return (
-    <section id="contact" className="px-6 py-32 max-w-7xl mx-auto">
-      <div className="relative rounded-[3rem] bg-secondary-bg/50 border border-white/5 p-8 md:p-16 overflow-hidden">
-        {/* Decorative background glow */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-accent/10 blur-[100px] -z-10" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/5 blur-[100px] -z-10" />
+    <section id="contact" className="px-6 py-24 max-w-7xl mx-auto">
+      <div className="relative rounded-[2rem] md:rounded-[3rem] bg-secondary-bg/50 border border-white/5 p-8 md:p-16 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-accent/10 blur-[100px] -z-10" />
+        <div className="absolute bottom-0 left-0 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-accent/5 blur-[100px] -z-10" />
 
         <div className="max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Let's build something{" "}
             <span className="text-accent italic">extraordinary</span> together.
           </h2>
-          <p className="text-text-gray text-lg mb-12 leading-relaxed">
+          <p className="text-text-gray text-base md:text-lg mb-12 leading-relaxed">
             Currently available for new opportunities and interesting projects.
             Feel free to reach out through any of these channels.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {contacts.map((contact, i) => (
             <a
               key={i}
@@ -230,7 +336,7 @@ const Contact = () => {
               className="group p-6 rounded-2xl bg-background/50 border border-white/5 hover:border-accent/30 hover:bg-background transition-all"
             >
               <contact.icon className="w-6 h-6 text-accent mb-4 group-hover:scale-110 transition-transform" />
-              <p className="text-xs font-bold uppercase tracking-widest text-text-gray mb-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-text-gray mb-1">
                 {contact.label}
               </p>
               <p className="text-sm font-medium truncate">{contact.value}</p>
@@ -244,31 +350,30 @@ const Contact = () => {
 
 export default function Home() {
   const works = [
-    { title: "Software Engineer", bg: "blue" },
-    { title: "Problem Solver", bg: "purple" },
-    { title: "Fitness Enthusiast", bg: "green" },
-    { title: "Disciplined", bg: "yellow" },
-    { title: "Perfectionist", bg: "red" },
-    { title: "Detail Oriented", bg: "pink" },
-    { title: "Curious Learner", bg: "amber" },
+    { title: "Flutter Developer", bg: "blue" },
+    { title: "Mobile Specialist", bg: "purple" },
+    { title: "Clean Coder", bg: "green" },
+    { title: "Problem Solver", bg: "yellow" },
+    { title: "Mid-Level Dev", bg: "red" },
   ];
 
   return (
-    <main className="min-h-screen bg-background text-foreground scroll-smooth pt-24 md:pt-32">
+    <main className="min-h-screen bg-background text-foreground scroll-smooth pt-20 md:pt-32 overflow-x-hidden">
       <Navbar />
       <Hero works={works} />
       <TechStack />
       <About />
+      <Timeline />
       <ProjectShowcase projects={projectsData} />
       <Contact />
 
-      <footer className="py-24 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+      <footer className="py-16 md:py-24 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
           <div className="text-xl font-bold tracking-tight text-white">
             <span className="bg-accent px-2 rounded">Tonmoy.</span>
           </div>
 
-          <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-text-gray">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-text-gray">
             <a href="#" className="hover:text-accent transition-colors">
               Home
             </a>
@@ -285,6 +390,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <ChatWidget />
     </main>
   );
 }

@@ -2,6 +2,16 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+const heroIcons = [
+  { src: "/icons/flutter.png", alt: "Flutter" },
+  { src: "/icons/android.png", alt: "Android" },
+  { src: "/icons/dart.png", alt: "Dart" },
+  { src: "/icons/firebase.png", alt: "Firebase" },
+  { src: "/icons/getx.png", alt: "GetX" },
+  { src: "/icons/java.png", alt: "Java" },
+  { src: "/icons/sqlite.png", alt: "SQLite" },
+];
+
 const Hero = ({ works }: { works: { title: string; bg?: string }[] }) => {
   const [i, setI] = useState(0);
 
@@ -83,38 +93,34 @@ const Hero = ({ works }: { works: { title: string; bg?: string }[] }) => {
             {/* Rotating Icons Ring Container - Force square aspect ratio for perfect circular orbit */}
             <div className="absolute inset-0 flex items-center justify-center animate-rotate-full pointer-events-none">
               <div className="relative w-[80%] aspect-square rounded-full flex items-center justify-center">
-                {/* Flutter Icon - Top center */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 md:w-20 h-12 md:h-20 p-3 bg-secondary-bg/60 backdrop-blur-xl rounded-2xl border border-white/20 flex items-center justify-center shadow-[0_20px_50px_rgba(32,145,242,0.3)] perspective-1000 rotate-x-12">
-                  <div className="w-full h-full relative group shadow-inner">
-                    <Image
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
-                      alt="Flutter"
-                      className="w-full h-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
-                      height={100}
-                      width={100}
-                    />
-                  </div>
-                </div>
-                {/* Android Icon - Right center */}
-                <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-12 md:w-20 h-12 md:h-20 p-3 bg-secondary-bg/60 backdrop-blur-xl rounded-2xl border border-white/20 flex items-center justify-center -rotate-90 shadow-[50px_0_50px_rgba(32,145,242,0.2)] perspective-1000">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg"
-                    alt="Android"
-                    className="w-full h-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
-                    height={100}
-                    width={100}
-                  />
-                </div>
-                {/* Dart Icon - Left center */}
-                <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-12 md:w-20 h-12 md:h-20 p-3 bg-secondary-bg/60 backdrop-blur-xl rounded-2xl border border-white/20 flex items-center justify-center rotate-90 shadow-[-50px_0_50px_rgba(32,145,242,0.2)] perspective-1000">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
-                    alt="Dart"
-                    className="w-full h-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
-                    height={100}
-                    width={100}
-                  />
-                </div>
+                {heroIcons.map((icon, index) => {
+                  const angle = (index * 360) / heroIcons.length;
+                  const radian = (angle - 90) * (Math.PI / 180);
+                  const x = 50 + 50 * Math.cos(radian);
+                  const y = 50 + 50 * Math.sin(radian);
+
+                  return (
+                    <div
+                      key={icon.alt}
+                      className="absolute w-12 md:w-20 h-12 md:h-20 p-2 md:p-3 bg-secondary-bg/60 backdrop-blur-xl rounded-2xl border border-white/20 flex items-center justify-center shadow-[0_20px_50px_rgba(32,145,242,0.3)] perspective-1000"
+                      style={{
+                        top: `${y}%`,
+                        left: `${x}%`,
+                        transform: `translate(-50%, -50%)`,
+                      }}
+                    >
+                      <div className="w-full h-full relative group shadow-inner">
+                        <Image
+                          src={icon.src}
+                          alt={icon.alt}
+                          className="w-full h-full object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
+                          height={100}
+                          width={100}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
