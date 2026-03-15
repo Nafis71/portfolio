@@ -112,22 +112,47 @@ const Navbar = () => {
   );
 };
 
-const TechStack = () => (
-  <section className="border-y border-foreground/5 bg-secondary-bg/30 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 py-10">
-      <div className="flex flex-wrap justify-center gap-x-8 gap-y-6 text-text-gray font-medium uppercase tracking-widest text-[10px] md:text-sm">
-        <span>Flutter</span>
-        <span>Dart</span>
-        <span>Firebase</span>
-        <span>REST API</span>
-        <span>GetX</span>
-        <span>Provider</span>
-        <span>Hive</span>
-        <span>Sqflite</span>
+const TechStack = () => {
+  const skills = [
+    "Flutter",
+    "Dart",
+    "GetX",
+    "Provider",
+    "Firebase",
+    "REST API",
+    "WebSockets",
+    "Clean Architecture",
+    "Repository Pattern",
+    "Isolates",
+    "Google Maps API",
+    "AdMob",
+    "WorkManager",
+    "Crashlytics",
+    "In-App Purchases",
+    "SQLite",
+    "Hive",
+    "Git",
+    "Postman",
+    "Google Cloud",
+  ];
+
+  return (
+    <section className="border-y border-white/5 bg-secondary-bg/20 py-8 overflow-hidden">
+      <div className="flex flex-col gap-6">
+        <div className="flex animate-scroll hover:[animation-play-state:paused] gap-12 whitespace-nowrap">
+          {[...skills, ...skills].map((skill, i) => (
+            <div key={i} className="flex items-center gap-3 group">
+              <div className="w-1 h-1 rounded-full bg-accent opacity-40 group-hover:scale-150 group-hover:opacity-100 transition-all" />
+              <span className="text-text-gray font-black uppercase tracking-[0.3em] text-[10px] md:text-xs group-hover:text-accent transition-colors">
+                {skill}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const About = () => (
   <section
@@ -139,18 +164,25 @@ const About = () => (
         <h2 className="text-4xl md:text-5xl font-bold text-white">About me</h2>
         <div className="w-20 h-1.5 bg-accent rounded-full mx-auto" />
         <p className="text-text-gray text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          I am a <span className="text-white font-semibold">Flutter Developer</span> with 2+ years of experience building reliable
-          cross-platform apps. I specialize in Flutter, Dart, REST APIs, and
-          Firebase, with proven experience managing Play Store and App Store
-          releases for stable, crash-free apps. Currently serving as a Mid-Level
-          Flutter Developer at <span className="text-accent font-semibold underline decoration-accent/30 underline-offset-4">SaraTech Ltd</span>.
+          I am a{" "}
+          <span className="text-white font-semibold">Flutter Developer</span>{" "}
+          with 2+ years of experience building reliable cross-platform apps. I
+          specialize in Flutter, Dart, REST APIs, and Firebase, with proven
+          experience managing Play Store and App Store releases for stable,
+          crash-free apps. Currently serving as a Mid-Level Flutter Developer at{" "}
+          <span className="text-accent font-semibold underline decoration-accent/30 underline-offset-4">
+            SaraTech Ltd
+          </span>
+          .
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-12 md:gap-24 p-8 md:p-12 rounded-[2.5rem] bg-secondary-bg/30 border border-white/5 relative overflow-hidden group">
         <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl -z-10" />
         <div className="relative">
-          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">2+</div>
+          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">
+            2+
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
             Years of
             <br />
@@ -158,7 +190,9 @@ const About = () => (
           </div>
         </div>
         <div className="relative">
-          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">100%</div>
+          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">
+            100%
+          </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
             Crash-free
             <br />
@@ -204,7 +238,10 @@ const Timeline = () => {
   ];
 
   return (
-    <section id="experience" className="px-6 py-24 max-w-5xl mx-auto space-y-24 border-b border-white/5">
+    <section
+      id="experience"
+      className="px-6 py-24 max-w-5xl mx-auto space-y-24 border-b border-white/5"
+    >
       {/* Education Section */}
       <div className="space-y-12">
         <div className="flex flex-col items-center text-center space-y-4">
@@ -227,7 +264,9 @@ const Timeline = () => {
                   <p className="text-accent font-bold text-[10px] uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5" /> {item.period}
                   </p>
-                  <h3 className="text-xl font-bold mb-2 text-white leading-tight">{item.degree}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-white leading-tight">
+                    {item.degree}
+                  </h3>
                   <p className="text-text-gray font-medium mb-1">
                     {item.institution}
                   </p>
@@ -242,7 +281,9 @@ const Timeline = () => {
       {/* Experience Section */}
       <div className="space-y-12">
         <div className="flex flex-col items-center text-center space-y-4">
-          <h2 className="text-4xl font-bold text-white">Professional Experience</h2>
+          <h2 className="text-4xl font-bold text-white">
+            Professional Experience
+          </h2>
           <div className="w-20 h-1.5 bg-accent rounded-full" />
         </div>
 
@@ -350,11 +391,13 @@ const Contact = () => {
 
 export default function Home() {
   const works = [
-    { title: "Flutter Developer", bg: "blue" },
-    { title: "Mobile Specialist", bg: "purple" },
-    { title: "Clean Coder", bg: "green" },
-    { title: "Problem Solver", bg: "yellow" },
-    { title: "Mid-Level Dev", bg: "red" },
+    { title: "Software Engineer", bg: "blue" },
+    { title: "Problem Solver", bg: "purple" },
+    { title: "Fitness Enthusiast", bg: "green" },
+    { title: "Disciplined", bg: "yellow" },
+    { title: "Perfectionist", bg: "red" },
+    { title: "Detail Oriented", bg: "pink" },
+    { title: "Curious Learner", bg: "amber" },
   ];
 
   return (

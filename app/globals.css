@@ -32,6 +32,17 @@ body {
   }
 }
 
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 1.5rem)); }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
 @keyframes rotate-up {
   0% { transform: translateY(100%); opacity: 0; }
   10% { transform: translateY(0); opacity: 1; }

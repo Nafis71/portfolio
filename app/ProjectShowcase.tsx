@@ -24,19 +24,19 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
   const handleNext = () => setActiveIdx((prev) => (prev + 1) % projects.length);
   const handlePrev = () => setActiveIdx((prev) => (prev - 1 + projects.length) % projects.length);
 
-  // Get 3 consecutive projects for the sliding carousel effect
-  const getVisibleProjects = () => {
-    const prev = (activeIdx - 1 + projects.length) % projects.length;
-    const next = (activeIdx + 1) % projects.length;
+  const activeProj = projects[activeIdx];
+
+  // Get 3 screenshots from the SAME active project for the showcase
+  const getVisibleScreenshots = () => {
+    const imgs = activeProj.images;
     return [
-      { ...projects[prev], type: 'prev' },
-      { ...projects[activeIdx], type: 'active' },
-      { ...projects[next], type: 'next' }
+      { src: imgs[1 % imgs.length], type: 'side' },
+      { src: imgs[0 % imgs.length], type: 'active' },
+      { src: imgs[2 % imgs.length], type: 'side' }
     ];
   };
 
-  const visibleProjects = getVisibleProjects();
-  const activeProj = projects[activeIdx];
+  const visibleScreens = getVisibleScreenshots();
 
   return (
     <section id="projects" className="py-24 px-6 max-w-7xl mx-auto overflow-hidden border-b border-white/5">
@@ -48,37 +48,29 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
       </div>
 
       <div className="relative flex flex-col items-center gap-16">
-        {/* Project Carousel - Sliding Mobile Screens */}
+        {/* Project Carousel - Sliding Mobile Screens (All showing same app) */}
         <div className="relative w-full flex items-center justify-center min-h-[450px] md:min-h-[650px]">
           <div className="flex items-center justify-center gap-4 md:gap-12 w-full">
             <AnimatePresence mode="popLayout" initial={false}>
-              {visibleProjects.map((proj, i) => (
+              {visibleScreens.map((screen, i) => (
                 <motion.div
-                  key={`${proj.title}-${i}`}
-                  initial={{ x: 150, opacity: 0, scale: 0.8 }}
+                  key={`${activeProj.title}-${i}`} // Keyed by project title so all 3 slide on change
+                  initial={{ x: 200, opacity: 0, scale: 0.8 }}
                   animate={{ 
                     x: 0, 
-                    opacity: i === 1 ? 1 : 0.3, 
+                    opacity: i === 1 ? 1 : 0.35, 
                     scale: i === 1 ? 1 : 0.8,
                     rotate: i === 0 ? -10 : i === 2 ? 10 : 0,
                     zIndex: i === 1 ? 20 : 10,
-                    filter: i === 1 ? "blur(0px)" : "blur(3px)"
+                    filter: i === 1 ? "blur(0px)" : "blur(2px)"
                   }}
-                  exit={{ x: -150, opacity: 0, scale: 0.8 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 25 }}
+                  exit={{ x: -200, opacity: 0, scale: 0.8 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 28 }}
                   className={`relative aspect-[9/19.5] ${
                     i === 1 ? 'w-[220px] md:w-[320px]' : 'w-[180px] md:w-[260px] hidden md:block'
                   }`}
                 >
-                  {/* Using the first image of each project for the frame */}
-                  <IPhoneFrame src={proj.images[0]} isMain={i === 1} />
-                  
-                  {/* Project Title Label for side phones */}
-                  {i !== 1 && (
-                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-black uppercase tracking-widest text-white/20">
-                      {proj.title}
-                    </div>
-                  )}
+                  <IPhoneFrame src={screen.src} isMain={i === 1} />
                 </motion.div>
               ))}
             </AnimatePresence>
