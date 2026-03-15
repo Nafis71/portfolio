@@ -385,6 +385,17 @@ const Contact = () => {
   );
 };
 
+const FadeInWhenVisible = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
+    {children}
+  </motion.div>
+);
+
 export default function Home() {
   const works = [
     { title: "Software Engineer", bg: "blue" },
@@ -400,11 +411,21 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground scroll-smooth pt-20 md:pt-32 overflow-x-hidden">
       <Navbar />
       <Hero works={works} />
-      <TechStack />
-      <About />
-      <Timeline />
-      <ProjectShowcase projects={projectsData} />
-      <Contact />
+      <FadeInWhenVisible>
+        <TechStack />
+      </FadeInWhenVisible>
+      <FadeInWhenVisible>
+        <About />
+      </FadeInWhenVisible>
+      <FadeInWhenVisible>
+        <Timeline />
+      </FadeInWhenVisible>
+      <FadeInWhenVisible>
+        <ProjectShowcase projects={projectsData} />
+      </FadeInWhenVisible>
+      <FadeInWhenVisible>
+        <Contact />
+      </FadeInWhenVisible>
 
       <footer className="py-16 md:py-24 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
