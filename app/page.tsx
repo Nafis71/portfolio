@@ -17,6 +17,7 @@ import Hero from "./hero";
 import ProjectShowcase from "./ProjectShowcase";
 import projectsData from "../data/projects.json";
 import ChatWidget from "./chat-widget";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -159,40 +160,53 @@ const About = () => (
       <div className="space-y-6">
         <h2 className="text-4xl md:text-5xl font-bold text-white">About me</h2>
         <div className="w-20 h-1.5 bg-accent rounded-full mx-auto" />
-        <p className="text-text-gray text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          I am a{" "}
-          <span className="text-white font-semibold">Flutter Developer</span>{" "}
-          with 2+ years of experience building reliable cross-platform apps. I
-          specialize in Flutter, Dart, REST APIs, and Firebase, with proven
-          experience managing Play Store and App Store releases for stable,
-          crash-free apps. Currently serving as a Mid-Level Flutter Developer at{" "}
-          <span className="text-accent font-semibold underline decoration-accent/30 underline-offset-4">
-            SaraTech Ltd
-          </span>
-          .
-        </p>
+        <div className="text-text-gray text-base md:text-lg leading-relaxed max-w-3xl mx-auto space-y-6">
+          <p>
+            A <span className="text-white font-semibold">Mid-Level Flutter Developer</span> passionate about building high-performance, scalable, and beautifully designed mobile applications.
+          </p>
+          <p>
+            With over 2 years of professional experience, I specialize in developing robust cross-platform apps using Flutter and Dart, with a strong focus on maintainable architecture, performance optimization, and smooth user experiences. I enjoy transforming complex product ideas into pixel-perfect interfaces and reliable production systems.
+          </p>
+          <p>
+            In my work, I focus on writing clean and scalable code using Layered Architecture, Repository Patterns, and modern state management solutions like GetX and Provider. I also have experience integrating REST APIs, Firebase services, real-time systems, and background processing to build apps that perform efficiently even under heavy workloads.
+          </p>
+          <p>
+            Throughout my career, I have contributed to multiple production apps including marketplaces, AI-powered platforms, productivity tools, and pet care ecosystems, managing everything from feature development and architecture design to Play Store and App Store releases.
+          </p>
+          <p>
+            Beyond coding, I enjoy continuously improving my craft, learning new technologies, and building products that solve real problems. My goal is to grow into a senior mobile engineer who builds scalable products used by millions of people.
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-12 md:gap-24 p-8 md:p-12 rounded-[2.5rem] bg-secondary-bg/30 border border-white/5 relative overflow-hidden group">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 p-8 md:p-12 rounded-[2.5rem] bg-secondary-bg/30 border border-white/5 relative overflow-hidden group">
         <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl -z-10" />
+
         <div className="relative">
-          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">
-            2+
-          </div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">2+</div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Years of
-            <br />
-            experience
+            Years<br />Experience
           </div>
         </div>
+
         <div className="relative">
-          <div className="text-4xl md:text-6xl font-black mb-2 text-accent tracking-tighter italic">
-            100%
-          </div>
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">5+</div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
-            Crash-free
-            <br />
-            stability
+            Production<br />Apps
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">40%</div>
+          <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
+            Performance<br />Improvement
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">99.9%</div>
+          <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
+            Crash-Free<br />Stability
           </div>
         </div>
       </div>
@@ -206,6 +220,7 @@ const Timeline = () => {
       company: "SaraTech Ltd.",
       role: "Flutter Developer (Mid-Level)",
       period: "Oct 2025 – Present",
+      website: "https://saratech.com.bd",
       description:
         "Led development of cross-platform Flutter apps for Android and iOS, implementing advanced features and integrating REST APIs, Firebase, and third-party services. Optimized performance for 100% crash-free stability and maintained scalable codebases.",
     },
@@ -213,6 +228,7 @@ const Timeline = () => {
       company: "SaraTech Ltd.",
       role: "Junior Flutter Developer",
       period: "Mar 2024 – Oct 2025",
+      website: "https://saratech.com.bd",
       description:
         "Assisted in developing cross-platform apps, implementing core features and integrating REST APIs. Converted Figma designs into pixel-perfect UI and collaborated with the team to deliver features on schedule.",
     },
@@ -224,12 +240,14 @@ const Timeline = () => {
       degree: "BSc in Computer Science & Engineering",
       period: "Jan 2020 – Mar 2024",
       location: "Dhaka, Bangladesh",
+      website: "https://www.bubt.edu.bd/",
     },
     {
       institution: "Ostad",
       degree: "App Development with Flutter",
       period: "Mar 2023 – Sep 2023",
       location: "Coursework",
+      website: "https://ostad.app/",
     },
   ];
 
@@ -256,7 +274,7 @@ const Timeline = () => {
                 <div className="p-3 bg-accent/10 rounded-2xl text-accent group-hover:bg-accent group-hover:text-white transition-all">
                   <GraduationCap className="w-6 h-6" />
                 </div>
-                <div>
+                <Link href={item.website}>
                   <p className="text-accent font-bold text-[10px] uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5" /> {item.period}
                   </p>
@@ -267,7 +285,7 @@ const Timeline = () => {
                     {item.institution}
                   </p>
                   <p className="text-text-gray/50 text-xs">{item.location}</p>
-                </div>
+                </Link>
               </div>
             </div>
           ))}
@@ -297,10 +315,13 @@ const Timeline = () => {
                     <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-accent transition-colors">
                       {exp.role}
                     </h3>
-                    <div className="text-accent font-semibold text-lg flex items-center gap-2">
+                    <Link
+                      href={exp.website}
+                      className="text-accent font-semibold text-lg flex items-center gap-2"
+                    >
                       <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                       {exp.company}
-                    </div>
+                    </Link>
                   </div>
                   <time className="px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent font-bold text-xs uppercase tracking-widest whitespace-nowrap self-start md:self-center">
                     {exp.period}
