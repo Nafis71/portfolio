@@ -143,7 +143,7 @@ const Hero = ({ works }: { works: { title: string; bg?: string }[] }) => {
           </div>
 
           {/* Bird GIF */}
-          <div className="absolute top-[40%] right-[8%] md:right-[13%] w-[80px] md:w-[160px] z-20 pointer-events-none animate-bounce-slow">
+          {/*<div className="absolute top-[40%] right-[8%] md:right-[13%] w-[80px] md:w-[160px] z-20 pointer-events-none animate-bounce-slow">
             <Image
               src="/bird.gif"
               alt="Flying Bird"
@@ -151,7 +151,7 @@ const Hero = ({ works }: { works: { title: string; bg?: string }[] }) => {
               height={100}
               width={100}
             />
-          </div>
+          </div>*/}
         </div>
       </div>
     </section>
