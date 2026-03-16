@@ -12,34 +12,52 @@ interface Project {
 
 const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [screenshotIdx, setScreenshotIdx] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [projects.length]);
+  }, [activeIdx, screenshotIdx, projects.length]);
 
-  const handleNext = () => setActiveIdx((prev) => (prev + 1) % projects.length);
-  const handlePrev = () => setActiveIdx((prev) => (prev - 1 + projects.length) % projects.length);
+  const handleNext = () => {
+    const currentProj = projects[activeIdx];
+    if (screenshotIdx < currentProj.images.length - 1) {
+      setScreenshotIdx((prev) => prev + 1);
+    } else {
+      setActiveIdx((prev) => (prev + 1) % projects.length);
+      setScreenshotIdx(0);
+    }
+  };
+
+  const handlePrev = () => {
+    if (screenshotIdx > 0) {
+      setScreenshotIdx((prev) => prev - 1);
+    } else {
+      const prevIdx = (activeIdx - 1 + projects.length) % projects.length;
+      setActiveIdx(prevIdx);
+      setScreenshotIdx(projects[prevIdx].images.length - 1);
+    }
+  };
+
+  const activeProj = projects[activeIdx];
 
   const getVisibleScreenshots = () => {
-    const activeProj = projects[activeIdx];
     const imgs = activeProj.images;
     return [
-      { src: imgs[1 % imgs.length], type: 'side' },
-      { src: imgs[0 % imgs.length], type: 'active' },
-      { src: imgs[2 % imgs.length], type: 'side' }
+      { src: imgs[(screenshotIdx + 1) % imgs.length], type: 'side' },
+      { src: imgs[screenshotIdx % imgs.length], type: 'active' },
+      { src: imgs[(screenshotIdx + 2) % imgs.length], type: 'side' }
     ];
   };
 
   const visibleScreens = getVisibleScreenshots();
-  const activeProj = projects[activeIdx];
 
   return (
     <section id="projects" className="py-16 md:py-24 px-6 max-w-7xl mx-auto overflow-hidden border-b border-white/5">
       <div className="text-center mb-12 md:mb-16">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic tracking-tighter mb-4 text-white uppercase">
+        <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter mb-4 text-white uppercase">
           <span className="bg-accent px-3 md:px-4 py-1 rounded text-white not-italic">Selected</span> Projects
         </h2>
         <div className="w-1 h-12 md:h-16 bg-accent mx-auto mt-4 rounded-full opacity-40 animate-pulse" />
@@ -52,8 +70,8 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
             <AnimatePresence mode="popLayout" initial={false}>
               {visibleScreens.map((screen, i) => (
                 <motion.div
-                  key={`${activeProj.title}-${i}`}
-                  initial={{ x: 100, opacity: 0, scale: 0.8 }}
+                  key={`${activeProj.title}-${screenshotIdx}-${i}`}
+                  initial={{ x: 200, opacity: 0, scale: 0.8 }}
                   animate={{ 
                     x: 0, 
                     opacity: i === 1 ? 1 : 0.35, 
@@ -62,7 +80,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
                     zIndex: i === 1 ? 20 : 10,
                     filter: i === 1 ? "blur(0px)" : "blur(2px)"
                   }}
-                  exit={{ x: -100, opacity: 0, scale: 0.8 }}
+                  exit={{ x: -200, opacity: 0, scale: 0.8 }}
                   transition={{ type: "spring", stiffness: 260, damping: 28 }}
                   className={`relative aspect-[9/19.5] ${
                     i === 1 ? 'w-[200px] sm:w-[260px] md:w-[320px]' : 'w-[160px] md:w-[260px] hidden md:block'
@@ -105,7 +123,10 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
               {projects.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveIdx(idx)}
+                  onClick={() => {
+                    setActiveIdx(idx);
+                    setScreenshotIdx(0);
+                  }}
                   className={`h-1.5 md:h-2 rounded-full transition-all duration-700 ${idx === activeIdx ? 'w-8 md:w-12 bg-accent' : 'w-1.5 md:w-2 bg-white/10'}`} 
                 />
               ))}
