@@ -1,0 +1,50 @@
+
+> t_portfollio@0.1.0 build /data/Workspace/t_portfollio
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Turbopack build encountered 2 warnings:
+[next]/internal/font/google/geist_a71539c9.module.css
+Error while requesting resource
+There was an issue establishing a connection while requesting https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap
+
+
+[next]/internal/font/google/geist_mono_8d43a2aa.module.css
+Error while requesting resource
+There was an issue establishing a connection while requesting https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 3 errors:
+./app/hero.tsx:96:15
+Parsing ecmascript source code failed
+[0m [90m  94 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m  95 |[39m           [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m  96 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m     |[39m               [31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m  97 |[39m
+ [90m     |[39m [31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m  98 |[39m         [33m<[39m[33mmotion[39m[33m.[39mdiv
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  99 |[39m           className[33m=[39m[32m"flex flex-wrap justify-center lg:justify-start gap-4 mt-8 md:mt-12"[39m
+ [90m 100 |[39m           variants[33m=[39m{{ hidden[33m:[39m { opacity[33m:[39m [35m0[39m[33m,[39m y[33m:[39m [35m10[39m }[33m,[39m show[33m:[39m { opacity[33m:[39m [35m1[39m[33m,[39m y[33m:[39m [35m0[39m } }}
+ [90m 101 |[39m         [33m>[39m[0m
+
+Expected '</', got 'jsx text'
+
+
+[next]/internal/font/google/geist_a71539c9.module.css
+next/font: error:
+Failed to fetch `Geist` from Google Fonts.
+
+
+[next]/internal/font/google/geist_mono_8d43a2aa.module.css
+next/font: error:
+Failed to fetch `Geist Mono` from Google Fonts.
+
+
+    at <unknown> (./app/hero.tsx:96:15)
+ ELIFECYCLE  Command failed with exit code 1.

@@ -1,0 +1,6 @@
+
+> t_portfollio@0.1.0 lint /data/Workspace/t_portfollio
+> next lint
+
+Invalid project directory provided, no such directory: /data/Workspace/t_portfollio/lint
+ ELIFECYCLE  Command failed with exit code 1.
