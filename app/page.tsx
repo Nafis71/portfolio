@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import {
   Menu,
   X,
@@ -114,12 +115,12 @@ const Navbar = () => {
         isVisible ? "translate-y-0" : "-translate-y-full",
       ].join(" ")}
     >
-      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
+      <nav className="flex items-center justify-between px-6 py-2 max-w-7xl mx-auto w-full">
         <a
           href="#"
-          className="text-2xl font-black italic tracking-tighter text-white"
         >
-          <span className="bg-accent px-2 py-0.5 rounded">Tonmoy.</span>
+          <Image src="/tonmoy.png" alt="Tonmoy" width={100} height={100} className="w-14 h-14 object-cover  border-2 border-accent rounded-full ring-6  ring-accent/20" />
+          {/* <span className="bg-accent px-2 py-0.5 rounded">Tonmoy.</span> */}
         </a>
 
         <div className="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-gray">
