@@ -223,7 +223,7 @@ const About = () => (
 
         <div className="relative">
           <div className="text-4xl md:text-5xl font-black mb-2 text-accent tracking-tighter italic">
-            5+
+            4+
           </div>
           <div className="text-[10px] md:text-xs text-text-gray uppercase font-black tracking-[0.2em] leading-tight">
             Production
@@ -450,11 +450,7 @@ const Contact = () => {
   );
 };
 
-const ScrollReactiveSection = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const ScrollReactiveSection = ({ children }: { children: React.ReactNode }) => {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -463,13 +459,25 @@ const ScrollReactiveSection = ({
     offset: ["start end", "end start"],
   });
 
-  const scaleRaw = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.04, 0.92]);
+  const scaleRaw = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.9, 1.04, 0.92],
+  );
   const yRaw = useTransform(scrollYProgress, [0, 0.5, 1], [40, 0, -30]);
-  const opacityRaw = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.25, 0.6, 1, 0.75, 0.5]);
+  const opacityRaw = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.5, 0.8, 1],
+    [0.25, 0.6, 1, 0.75, 0.5],
+  );
 
   const scale = useSpring(scaleRaw, { stiffness: 140, damping: 26, mass: 0.6 });
   const y = useSpring(yRaw, { stiffness: 140, damping: 26, mass: 0.6 });
-  const opacity = useSpring(opacityRaw, { stiffness: 120, damping: 30, mass: 0.8 });
+  const opacity = useSpring(opacityRaw, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.8,
+  });
 
   if (reduceMotion) return <div>{children}</div>;
 
