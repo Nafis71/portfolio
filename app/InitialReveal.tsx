@@ -13,33 +13,70 @@ export default function InitialReveal() {
   const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        if (revealRef.current) revealRef.current.style.display = "none";
-      },
-    });
+    const overlayEl = revealRef.current;
+    const boxEl = boxRef.current;
 
-    // 2. The Reveal Sequence
-    tl.to(boxRef.current, {
-      scale: 250, // Massive scale to ensure even the furthest corners are covered
-      duration: 2.2,
-      ease: "expo.inOut",
-      delay: 0.5,
-    })
-    .to(revealRef.current, {
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    }, "-=0.8");
+    // If anything goes wrong, never block the UI forever.
+    const forceDismiss = () => {
+      if (!overlayEl) return;
+      overlayEl.style.opacity = "0";
+      overlayEl.style.pointerEvents = "none";
+      overlayEl.style.display = "none";
+    };
 
-    // 3. Subtle content slide-in
-    gsap.fromTo("main", 
-      { opacity: 0, scale: 0.95, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 2.5, ease: "expo.out", delay: 1.2 }
-    );
+    const fallbackTimer = window.setTimeout(forceDismiss, 6000);
+
+    if (!overlayEl || !boxEl) {
+      forceDismiss();
+      return () => window.clearTimeout(fallbackTimer);
+    }
+
+    let tl: gsap.core.Timeline | null = null;
+    try {
+      tl = gsap.timeline({
+        onComplete: () => {
+          window.clearTimeout(fallbackTimer);
+          forceDismiss();
+        },
+      });
+
+      // 2. The Reveal Sequence
+      tl.to(boxEl, {
+        scale: 250, // Massive scale to ensure even the furthest corners are covered
+        duration: 2.2,
+        ease: "expo.inOut",
+        delay: 0.5,
+      }).to(
+        overlayEl,
+        {
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.8"
+      );
+
+      // 3. Subtle content slide-in
+      gsap.fromTo(
+        "main",
+        { opacity: 0, scale: 0.95, y: 30 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 2.5,
+          ease: "expo.out",
+          delay: 1.2,
+          clearProps: "transform",
+        }
+      );
+    } catch {
+      forceDismiss();
+    }
 
     return () => {
-      tl.kill();
+      window.clearTimeout(fallbackTimer);
+      tl?.kill();
     };
   }, []);
 

@@ -28,6 +28,8 @@ import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastYRef = useRef(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,6 +38,64 @@ const Navbar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const SHOW_AT_TOP_PX = 24;
+    const DELTA_PX = 6;
+
+    const applyScroll = (scrollY: number, direction?: number) => {
+      if (isOpen) {
+        setIsVisible(true);
+        lastYRef.current = scrollY;
+        return;
+      }
+
+      if (scrollY <= SHOW_AT_TOP_PX) {
+        setIsVisible(true);
+        lastYRef.current = scrollY;
+        return;
+      }
+
+      if (direction === 1) {
+        setIsVisible(false);
+        lastYRef.current = scrollY;
+        return;
+      }
+
+      if (direction === -1) {
+        setIsVisible(true);
+        lastYRef.current = scrollY;
+        return;
+      }
+
+      const lastY = lastYRef.current;
+      const delta = scrollY - lastY;
+
+      if (Math.abs(delta) < DELTA_PX) return;
+
+      setIsVisible(delta < 0);
+      lastYRef.current = scrollY;
+    };
+
+    const onLenisScroll = (e: Event) => {
+      const ce = e as CustomEvent<{ scroll?: number; direction?: number }>;
+      const scrollY =
+        typeof ce.detail?.scroll === "number" ? ce.detail.scroll : window.scrollY;
+      const direction = ce.detail?.direction;
+      applyScroll(scrollY, direction);
+    };
+
+    const onScroll = () => applyScroll(window.scrollY);
+
+    lastYRef.current = window.scrollY;
+    window.addEventListener("lenis-scroll", onLenisScroll as EventListener);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("lenis-scroll", onLenisScroll as EventListener);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { name: "Home", href: "#" },
@@ -46,7 +106,14 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
+    <header
+      className={[
+        "fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5",
+        "isolate",
+        "transition-transform duration-300 ease-out will-change-transform",
+        isVisible ? "translate-y-0" : "-translate-y-full",
+      ].join(" ")}
+    >
       <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
         <a
           href="#"
@@ -505,7 +572,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-background text-foreground scroll-smooth pt-20 md:pt-32 overflow-x-hidden">
+    <main className="min-h-screen bg-background text-foreground scroll-smooth overflow-x-hidden pt-20">
       <Navbar />
       <Hero works={works} />
       <ScrollReactiveSection>

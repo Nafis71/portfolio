@@ -31,7 +31,20 @@ export default function SmoothScrollProvider({
     lenisRef.current = lenis;
 
     // 3. Connect Lenis to ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
+    lenis.on("scroll", (e: any) => {
+      // Keep ScrollTrigger synced with Lenis
+      ScrollTrigger.update();
+
+      // Also broadcast Lenis scroll so UI (e.g. navbar) can react reliably
+      window.dispatchEvent(
+        new CustomEvent("lenis-scroll", {
+          detail: {
+            scroll: typeof e?.scroll === "number" ? e.scroll : window.scrollY,
+            direction: typeof e?.direction === "number" ? e.direction : 0, // 1 down, -1 up
+          },
+        })
+      );
+    });
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
