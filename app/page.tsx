@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Menu,
   X,
@@ -11,7 +11,14 @@ import {
   GraduationCap,
   Calendar,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 import Hero from "./hero";
 import ProjectShowcase from "./ProjectShowcase";
@@ -443,16 +450,40 @@ const Contact = () => {
   );
 };
 
-const FadeInWhenVisible = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 1.5, ease: "easeOut" }}
-  >
-    {children}
-  </motion.div>
-);
+const ScrollReactiveSection = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const scaleRaw = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.04, 0.92]);
+  const yRaw = useTransform(scrollYProgress, [0, 0.5, 1], [40, 0, -30]);
+  const opacityRaw = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.25, 0.6, 1, 0.75, 0.5]);
+
+  const scale = useSpring(scaleRaw, { stiffness: 140, damping: 26, mass: 0.6 });
+  const y = useSpring(yRaw, { stiffness: 140, damping: 26, mass: 0.6 });
+  const opacity = useSpring(opacityRaw, { stiffness: 120, damping: 30, mass: 0.8 });
+
+  if (reduceMotion) return <div>{children}</div>;
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ scale, y, opacity, transformOrigin: "center top" }}
+      transition={{ type: "spring" }}
+      className="will-change-transform"
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 export default function Home() {
   const works = [
@@ -469,21 +500,21 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground scroll-smooth pt-20 md:pt-32 overflow-x-hidden">
       <Navbar />
       <Hero works={works} />
-      <FadeInWhenVisible>
+      <ScrollReactiveSection>
         <TechStack />
-      </FadeInWhenVisible>
-      <FadeInWhenVisible>
+      </ScrollReactiveSection>
+      <ScrollReactiveSection>
         <About />
-      </FadeInWhenVisible>
-      <FadeInWhenVisible>
+      </ScrollReactiveSection>
+      <ScrollReactiveSection>
         <Timeline />
-      </FadeInWhenVisible>
-      <FadeInWhenVisible>
+      </ScrollReactiveSection>
+      <ScrollReactiveSection>
         <ProjectShowcase projects={projectsData} />
-      </FadeInWhenVisible>
-      <FadeInWhenVisible>
+      </ScrollReactiveSection>
+      <ScrollReactiveSection>
         <Contact />
-      </FadeInWhenVisible>
+      </ScrollReactiveSection>
 
       <footer className="py-16 md:py-24 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
